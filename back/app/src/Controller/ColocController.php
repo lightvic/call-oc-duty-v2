@@ -19,15 +19,9 @@ class colocController extends Controller
     #[Route('/api/colocSection', 'colocSection', ['GET'])]
     public function colocSection()
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
+
         $colocRepository = new ColocRepository(new PDOFactory());
         $colocs = $colocRepository->getAllColocByUserId($currentUser);
 
