@@ -84,4 +84,23 @@ class UserColocRepository extends Repository
 
         return $query->execute();
     }
+
+    public function getUserColocByUserUuidAndColocUuid($userUuid, $colocUuid): ?UserColoc
+    {
+        $userColoc =
+            'SELECT * FROM `users_colocs`
+            WHERE coloc_uuid = :colocUuid
+            AND user_uuid = :userUuid';
+
+        $query = $this->pdo->prepare($userColoc);
+        $query->bindValue(':userUuid', $userUuid);
+        $query->bindValue(':colocUuid', $colocUuid);
+        $query->execute();
+
+        $userColoc = $query->fetch(\PDO::FETCH_ASSOC);
+        if ($userColoc) {
+            return new UserColoc($userColoc);
+        }
+        return null;
+    }
 }

@@ -258,4 +258,50 @@ class colocController extends Controller
         ]);
         die();
     }
+
+    #[Route('/api/addUserToColoc/{colocUuid}', 'add user to coloc', ['POST'])]
+    public function addUserToColoc($colocUuid)
+    {
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
+
+        $userColocRepository = new UserColocRepository(new PDOFactory());
+        $admin = $userColocRepository->getAdminByColocUuid($colocUuid);
+
+        if ($admin['user_uuid'] !== $currentUser) {
+            $this->renderJSON([
+                "error" => 'Vous n\'étes pas admin'
+            ]);
+            http_response_code(200);
+            die;
+        }
+
+        $userMail = $_POST['email'];
+        $userRepository = new UserRepository(new PDOFactory());
+        $user = $userRepository->getUserByMail($userMail);
+
+        $userColoc = $userColocRepository->getUserColocByUserUuidAndColocUuid($user->getUuid(), $colocUuid);
+
+        if ($userColoc) {
+            $this->renderJSON([
+                "error" => 'aucun user avec cette email'
+            ]);
+            http_response_code(200);
+            die;
+        }
+
+        $userColocArgs = [
+            'uuid' => $this->MakeUuid(),
+            'user_uuid' => $user->getUuid(),
+            'coloc_uuid' => $colocUuid
+        ];
+
+        $userColoc = new UserColoc($userColocArgs);
+        $userColocRepository->insertUserColoc($userColoc);
+
+        $this->renderJSON([
+            'success' => 'mise à jour du user effectuée avec succès'
+        ]);
+        die();
+    }
 }
