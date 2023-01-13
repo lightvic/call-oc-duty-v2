@@ -1,0 +1,11 @@
+.button-action {
+  font-family: 'Inter-Medium';
+}
+
+.button-action:hover {
+  color: var(--button-action-hover);
+}
+
+.button-action:active {
+  color: var(--button-action-active);
+}

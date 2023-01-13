@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: front_ops
+    ports:
+      - "2000:3000"
+    volumes:
+      - ./client:/project
+    command: sh -c "npm install && npm run start"

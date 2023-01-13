@@ -1,0 +1,20 @@
+body {
+  background-color: var(--ligth-grey);
+}
+
+.dashboard-container {
+  margin-left: 252px;
+  padding: 28px;
+  height: 100vh;
+}
+
+.dashboard-info {
+  margin-bottom: 34px;
+}
+
+.dashboard-info__title {
+  font-family: Inter-SemiBold;
+  font-size: 1.25rem;
+
+  margin-bottom: 12px;
+}

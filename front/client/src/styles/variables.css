@@ -1,0 +1,15 @@
+:root {
+  --black: #000;
+  --white: #fff;
+  --ligth-grey: #f5f5f5;
+  --grey: #cdcbcb;
+
+  --main-color: #4369db;
+  --main-color-light: #ccd6f5;
+  --main-color-hover: #5476de;
+  --main-color-active: #2f58d7;
+
+  --choice-hover: #e5ebfe;
+  --button-action-hover: #98adeb;
+  --button-action-active: #879fe8;
+}

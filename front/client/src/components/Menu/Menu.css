@@ -1,0 +1,23 @@
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: fixed;
+
+  background-color: var(--white);
+
+  height: calc(100vh - 46px);
+  padding: 28px 28px 18px 28px;
+
+  /* a supp */
+  width: 196px;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  margin: 60px 0 0 -4px;
+}

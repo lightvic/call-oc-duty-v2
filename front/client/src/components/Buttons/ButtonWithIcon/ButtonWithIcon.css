@@ -1,0 +1,30 @@
+.button-icon-container {
+  display: flex;
+  gap: 12px;
+
+  font-family: Inter-Medium;
+
+  padding: 10px;
+
+  cursor: pointer;
+}
+
+.button-icon-link--active {
+  color: var(--main-color);
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+
+  width: 20px;
+}
+
+.button-icon-container p {
+  padding-top: 1px;
+}
+
+.button-icon-container:hover {
+  background-color: var(--choice-hover);
+  border-radius: 8px;
+}

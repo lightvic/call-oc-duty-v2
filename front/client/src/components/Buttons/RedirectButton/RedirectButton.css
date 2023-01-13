@@ -1,0 +1,39 @@
+.redirect-button {
+  font-family: Inter-Medium;
+  font-size: 1.125em;
+
+  border: solid 2px var(--main-color);
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+
+.redirect-button--primary {
+  background-color: var(--main-color);
+  color: var(--white);
+}
+
+.redirect-button--primary:hover {
+  border-color: var(--main-color-hover);
+  background-color: var(--main-color-hover);
+}
+
+.redirect-button--primary:active {
+  border-color: var(--main-color-active);
+  background-color: var(--main-color-active);
+}
+
+.redirect-button--secondary {
+  color: var(--main-color);
+}
+
+.redirect-button--secondary:hover {
+  /* color: var(--white); */
+  background-color: var(--main-color-light);
+}
+
+.redirect-button--secondary:active {
+  /* color: var(--white); */
+  color: var(--main-color-active);
+  border-color: var(--main-color-active);
+  background-color: var(--main-color-light);
+}

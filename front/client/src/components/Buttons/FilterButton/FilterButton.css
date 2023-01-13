@@ -1,0 +1,31 @@
+.filter-button-container {
+  display: flex;
+
+  width: fit-content;
+
+  background-color: var(--white);
+
+  border: solid 1px var(--main-color);
+  border-radius: 8px;
+}
+
+.filter {
+  border-right: solid 1px var(--main-color);
+
+  padding: 10px 12px;
+
+  cursor: pointer;
+}
+
+.filter:first-child {
+  border-radius: 7px 0 0 7px;
+}
+
+.filter:last-child {
+  border: none;
+  border-radius: 0 7px 7px 0;
+}
+
+.filter:hover {
+  background-color: var(--choice-hover);
+}

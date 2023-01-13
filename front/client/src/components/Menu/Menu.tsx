@@ -1,0 +1,76 @@
+import React from 'react'
+import {
+  FlatsharesInfoContainer,
+  ButtonWithIcon,
+  UserInfoContainer,
+} from '../index'
+
+export default function Menu() {
+  const menuButtons = [
+    {
+      name: 'Notifications',
+      href: '/notifications',
+      icon: 'notifications',
+    },
+    {
+      name: 'Calendrier',
+      href: '/calendar',
+      icon: 'calendar',
+    },
+    {
+      name: 'Dashboard',
+      href: '/dashboard',
+      icon: 'dashboard',
+    },
+    {
+      name: 'Liste de courses',
+      href: '/todolist',
+      icon: 'todolist',
+    },
+    {
+      name: 'Messages',
+      href: '/chat',
+      icon: 'chat',
+    },
+    {
+      name: 'Cagnotte',
+      href: '/pot',
+      icon: 'pot',
+    },
+  ]
+
+  const windowLocation = window.location.pathname.split('/')[1]
+  console.log(windowLocation)
+
+  return (
+    <div className="menu-container">
+      <div>
+        <FlatsharesInfoContainer flatsharesName={'Call Oc Duty'} />
+
+        <div className="menu-buttons">
+          {menuButtons.map((button, i) => (
+            <ButtonWithIcon
+              key={i}
+              name={button.name}
+              href={button.href}
+              icon={button.icon}
+              isSelected={windowLocation == button.icon ? true : false}
+            />
+          ))}
+        </div>
+      </div>
+
+      <UserInfoContainer
+        userSrc={'/img.jpeg'}
+        userName={'Anthony Ringressi'}
+        userMail={'anthony.ringressi@hotmail.fr'}
+      />
+    </div>
+  )
+}
+
+// menu on the left of the page
+
+// Use FlatsharesInfoContainer
+// Use ButtonWithIcon component
+// Use UserInfoContainer

@@ -1,0 +1,30 @@
+.flatshares-info-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-family: 1.125em;
+
+  width: 100%;
+}
+
+.flatshares-image {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 100%;
+
+  object-fit: cover;
+}
+
+.flatshares-button-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.flatshares-info-container p {
+  font-family: 'Inter-Medium';
+  font-size: 1.125em;
+}
