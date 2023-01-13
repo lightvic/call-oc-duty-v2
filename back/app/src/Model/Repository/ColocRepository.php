@@ -34,7 +34,7 @@ class ColocRepository extends Repository
     public function getAllColocByUserId($userUuid): ?array
     {
         $query = $this->pdo->prepare(
-            "SELECT c.uuid, c.address, c.picture, c.post_code, c.town, uc.admin
+            "SELECT c.uuid, c.name, c.address, c.picture, c.post_code, c.town, uc.admin
             FROM `users_colocs` uc
             INNER JOIN colocs c ON c.uuid = uc.coloc_uuid
             AND uc.user_uuid = :userUuid"
@@ -58,11 +58,12 @@ class ColocRepository extends Repository
     public function insert(Coloc $coloc): Coloc
     {
         $newColoc =
-            'INSERT INTO `colocs` (`uuid`, `address`, `post_code`, `town`)
-            VALUES(:uuid, :address, :postCode, :town)';
+            'INSERT INTO `colocs` (`uuid`, `name`, `address`, `post_code`, `town`)
+            VALUES(:uuid, :name, :address, :postCode, :town)';
 
         $query = $this->pdo->prepare($newColoc);
         $query->bindValue(':uuid', $coloc->getUuid());
+        $query->bindValue(':name', $coloc->getName());
         $query->bindValue(':address', $coloc->getAddress());
         $query->bindValue(':postCode', $coloc->getPostCode());
         $query->bindValue(':town', $coloc->getTown());
@@ -79,11 +80,12 @@ class ColocRepository extends Repository
     {
         $updateColoc =
             'UPDATE `colocs`
-            SET `address` = :address, `post_code` = :postCode, `town` = :town, `picture` = :picture
+            SET `address` = :address, `name` = :name, `post_code` = :postCode, `town` = :town, `picture` = :picture
             WHERE `uuid` = :uuid';
 
         $query = $this->pdo->prepare($updateColoc);
         $query->bindValue(':address', $coloc->getAddress());
+        $query->bindValue(':name', $coloc->getName());
         $query->bindValue(':postCode', $coloc->getPostCode());
         $query->bindValue(':town', $coloc->getTown());
         $query->bindValue(':picture', $coloc->getPicture());

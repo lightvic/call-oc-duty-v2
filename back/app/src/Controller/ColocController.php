@@ -72,6 +72,7 @@ class colocController extends Controller
 
         $users = $_POST['users'];
         $colocArgs = [
+            'name' => $_POST['name'],
             'address' => $_POST['address'],
             'town' => $_POST['town'],
             'post_code' => $_POST['post_code']
@@ -94,14 +95,14 @@ class colocController extends Controller
 
             }
 
-            $colocArgs = [
+            $userColocArgs = [
                 'uuid' => $this->MakeUuid(),
                 'user_uuid' => $newUser->getUuid(),
                 'coloc_uuid' => $colocUuid,
                 'admin' => $admin
             ];
 
-            $newUserColoc = new UserColoc($colocArgs);
+            $newUserColoc = new UserColoc($userColocArgs);
             $userColocRepository = new UserColocRepository(new PDOFactory());
             $newUserColoc = $userColocRepository->insertUserColoc($newUserColoc);
 
@@ -171,6 +172,9 @@ class colocController extends Controller
 
         if ($_POST['address'] != null) {
             $coloc->setAddress($_POST['address']);
+        }
+        if ($_POST['name'] != null) {
+            $coloc->setName($_POST['name']);
         }
         if ($_POST['post_code'] != null) {
             $coloc->setPostCode($_POST['post_code']);
