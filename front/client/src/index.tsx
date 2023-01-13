@@ -8,12 +8,13 @@ import store from './store/store'
 import { BrowserRouter } from 'react-router-dom'
 import PersonelDounghnut from './components/PersonnelDoughnut/PersonelDounghnut'
 import ColocDounghnut from './components/ColocDoughnut/ColocDounghnut'
+import { ReccurentPurchase, RecentPurchase } from './components'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <BrowserRouter>
     {/* <Provider store={store}> */}
-    <App />
+     <App />
     {/* </Provider> */}
   </BrowserRouter>,
 )

@@ -1,27 +1,36 @@
 import { $CombinedState } from '@reduxjs/toolkit';
 import React, { PureComponent, useEffect, useState } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import {useNavigate} from "react-router-dom";
 
-// #[Route('/api/colocStat/{colocUuid}&{limitDate}', 'colocStat', ['GET'])] => route à envoyer
 
 
 export default function PersonelDounghnut() {
+  const token = JSON.parse(sessionStorage.token)
+  const navigate = useNavigate()
+
   const [expenses, setExpense]= useState()
   useEffect(() => {
     fetch('http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd6&365', {
       method: "GET",
       headers: new Headers({
-        "Authorization" : "Basic amZnbWFpbC5jb206cGFzc3dvcmQ=",
-        "Content-type":  "application/x-www-form-urlencoded"
+        Authorization: 'Bearer ' + token.token
     })
   })
-    .then(data => data.json())
-    .then(json => setExpense(json.userExpense))
-  },[]);
+  .then((data) => data.json())
+  .then((json) => {
+    if (json.message === 'invalid cred') {
+      sessionStorage.removeItem('token')
+      navigate('/signin')
+    }
+    setExpense(json.colocExpense)
+  })
+}, [])
 
   if (expenses != null){
+    var totalValue = 0
     const COLORS = []
-    const data = [{ name: 'Nécessités', value: 200 },]
+    const data = []
     console.log(expenses)
 
     expenses.map((expenses,index) => (
@@ -48,9 +57,9 @@ export default function PersonelDounghnut() {
         COLORS.push('#E8FCCF')
       }
     })
-
-    console.log(COLORS)
-    // const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#73BFB8','#E8FCCF'];    
+    data.forEach((value)=>{
+      totalValue = totalValue + value
+    })    
     
     return (
       <div>
@@ -73,7 +82,7 @@ export default function PersonelDounghnut() {
     );
   }
   else{
-    return null;
+    return <h1>pas de dépense</h1>;
   }
 };
 
