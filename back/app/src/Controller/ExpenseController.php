@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Entity\Expense;
 use App\Model\Factory\PDOFactory;
 use App\Model\Repository\ExpenseRepository;
 use App\Route\Route;
@@ -55,5 +56,36 @@ class ExpenseController extends Controller
         die();
     }
 
+    #[Route('/api/newExpense', 'new expense', ['POST'])]
+    public function newExpense()
+    {
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
+        $colocUuid = $_POST['colocUuid'];
+        $user = $_POST['user'];
+
+        $expenseArgs = [
+            'uuid' => $this->MakeUuid(),
+            'name' => $_POST['name'],
+            'value' => $_POST['value'],
+            'category' => $_POST['category'],
+            'type' => $_POST['type'],
+            'date' => $_POST['date'],
+            'fix' => $_POST['fix'],
+            'token' => $this->MakeUuid(),
+            'user_uuid' => $user,
+            'coloc_uuid' => $colocUuid
+        ];
+
+        $expense = new Expense($expenseArgs);
+        $expenseRepository = new ExpenseRepository(new PDOFactory());
+
+        $expenseRepository->insertExpense($expense);
+
+        $this->renderJSON([
+            'success' => 'Enregistré avec succés'
+        ]);
+        die();
+    }
 }

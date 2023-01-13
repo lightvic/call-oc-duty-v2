@@ -44,7 +44,7 @@ ALTER TABLE users_colocs ADD CONSTRAINT users_colocs_coloc_uuid_foreign FOREIGN 
 
 INSERT INTO users (uuid, pseudo, email, pwd) VALUES
 ('0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', 'jb', 'jb@mail.com', 'oui'),
-('d2da2a15-b22c-4403-ad33-345f0f59ad03', 'adrien', 'adrien@mail.com', 'oui'),
+('d2da2a15-b22c-4403-ad33-345f0f59ad03', 'adrien', 'adrien@mail.com', '$2y$10$jAteYHBYQTZhoffjp2kB..tD.oYf5f6pjZ26MuyzrvmjltYQwQq8O'),
 ('9d5edd7a-0352-4ba8-9094-03b95a3a143e', 'valentine', 'valentine@mail.com', 'oui'),
 ('6acea239-1568-4af7-8cf6-13f405c4cc31', 'victorien', 'victorien@mail.com', 'oui'),
 ('3c85ac51-e769-4efb-bab9-9a5307f55014', 'antho', 'antho@mail.com', 'oui'),
@@ -52,9 +52,9 @@ INSERT INTO users (uuid, pseudo, email, pwd) VALUES
 ('4aad1ecd-77cd-48cf-bbe1-b101868f69a8', 'pnj2', 'pnj2@mail.com', 'oui'),
 ('fd6519a7-90e1-4a70-9a49-95b28ccfe8ea', 'pnj3', 'pnj3@mail.com', 'oui');
 
-INSERT INTO colocs (uuid, address, post_code, town) VALUES
-('44a36f45-010f-4bf7-a7f0-8434108fecd6', '27 Bis Rue du Progrès', 93100, 'Montreuil'),
-('42500393-9805-4bca-8b5d-03df0d297927', '1 Rue Henri Guinier', 34000,'Montpellier');
+INSERT INTO colocs (uuid, name, address, post_code, town) VALUES
+('44a36f45-010f-4bf7-a7f0-8434108fecd6', 'call oc', '27 Bis Rue du Progrès', 93100, 'Montreuil'),
+('42500393-9805-4bca-8b5d-03df0d297927', 'back ops', '1 Rue Henri Guinier', 34000,'Montpellier');
 
 INSERT INTO users_colocs (uuid, user_uuid, coloc_uuid, admin) VALUES
 ('0c6d5a7d-b681-458c-9717-40a4b5b53005', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6', 0),
