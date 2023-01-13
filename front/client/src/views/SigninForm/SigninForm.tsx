@@ -1,14 +1,6 @@
 import React from 'react'
 import { InputForm } from '../../components'
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { ChangeEvent, useState } from 'react'
 
 export interface formDataInterface {
   pseudo: string
@@ -16,25 +8,18 @@ export interface formDataInterface {
   password: string
 }
 export default function SigninForm() {
-  // Exemple de .map avec une liste
-  const multiple = [
+  const inputs = [
     {
-      labelClassName: 'label',
-      inputId: 'email',
-      labelContent: 'Email',
-      inputClassName: 'inputSign',
-      inputType: 'email',
-      inputName: 'email',
-      inputPlaceHolder: 'ex : jean.martin@bidule.com',
+      label: 'Email',
+      type: 'email',
+      name: 'email',
+      placeholder: 'ex : jean.martin@bidule.com',
     },
     {
-      labelClassName: 'label',
-      inputId: 'password',
-      labelContent: 'Mot de passe',
-      inputClassName: 'inputSign',
-      inputType: 'password',
-      inputName: 'password',
-      inputPlaceHolder: 'Entrez votre mot de passe.',
+      label: 'Mot de passe',
+      type: 'password',
+      name: 'password',
+      placeholder: 'Entrez votre mot de passe.',
     },
   ]
 
@@ -55,16 +40,13 @@ export default function SigninForm() {
 
   return (
     <form>
-      {multiple.map((single, i) => (
+      {inputs.map((input, i) => (
         <InputForm
           key={i}
-          label={single.labelClassName}
-          inputId={single.inputId}
-          labelContent={single.labelContent}
-          inputClassName={single.inputClassName}
-          inputType={single.inputType}
-          inputName={single.inputName}
-          inputPlaceHolder={single.inputPlaceHolder}
+          label={input.label}
+          type={input.type}
+          name={input.name}
+          placeholder={input.placeholder}
           onChange={handleChange}
         />
       ))}
