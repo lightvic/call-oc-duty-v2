@@ -1,7 +1,7 @@
 <?php
     header("Access-Control-Allow-Origin: http://localhost:2000");
     header("Access-Control-Allow-Credentials: true");
-    header("Access-Control-Allow-Headers: authorization");
+    header("Access-Control-Allow-Headers: Authorization, Content-Type");
 
     if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
         die;

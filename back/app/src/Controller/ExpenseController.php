@@ -59,20 +59,22 @@ class ExpenseController extends Controller
     #[Route('/api/newExpense', 'new expense', ['POST'])]
     public function newExpense()
     {
+        $response = (array) json_decode(file_get_contents('php://input'));
+
         $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
         $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $colocUuid = $_POST['colocUuid'];
-        $user = $_POST['user'];
+        $colocUuid = $response['colocUuid'];
+        $user = $response['user'];
 
         $expenseArgs = [
             'uuid' => $this->MakeUuid(),
-            'name' => $_POST['name'],
-            'value' => $_POST['value'],
-            'category' => $_POST['category'],
-            'type' => $_POST['type'],
-            'date' => $_POST['date'],
-            'fix' => $_POST['fix'],
+            'name' => $response['name'],
+            'value' => $response['value'],
+            'category' => $response['category'],
+            'type' => $response['type'],
+            'date' => $response['date'],
+            'fix' => $response['fix'],
             'token' => $this->MakeUuid(),
             'user_uuid' => $user,
             'coloc_uuid' => $colocUuid

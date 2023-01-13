@@ -15,7 +15,6 @@ import {
 // }
 
 export default function InputForm({
-  onChange,
   label,
   type,
   name,
@@ -25,7 +24,6 @@ export default function InputForm({
   type: string
   name: string
   placeholder: string
-  onChange: any
 }) {
   return (
     <>
@@ -37,7 +35,6 @@ export default function InputForm({
         type={type}
         name={name}
         placeholder={placeholder}
-        onChange={onChange}
         id={name}
       />
     </>
