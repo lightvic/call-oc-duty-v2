@@ -1,1 +1,8 @@
-# call-oc-duty-v2
+# Call-oc-duty
+.
+
+## install
+`make install`
+
+## start
+`make start`
