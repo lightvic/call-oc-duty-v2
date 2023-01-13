@@ -20,33 +20,33 @@ export default function SignupForm() {
       label: 'Email',
       type: 'email',
       name: 'email',
-      placeHolder: 'ex : jean.martin@bidule.com',
+      placeholder: 'ex : jean.martin@bidule.com',
     },
     {
       label: 'Pseudo',
       type: 'text',
       name: 'pseudo',
-      placeHolder: 'JeanMartin90',
+      placeholder: 'JeanMartin90',
     },
     {
       label: 'Mot de passe',
-      type: 'pwd',
-      name: 'password',
-      placeHolder: 'Conseil : 8 caractères min',
+      type: 'password',
+      name: 'pwd',
+      placeholder: 'Conseil : 8 caractères min',
     },
     {
       label: 'Confirmer le mot de passe',
       type: 'password',
       name: 'confirmPassword',
-      placeHolder: 'Confirmez votre mot de passe',
+      placeholder: 'Confirmez votre mot de passe',
     },
   ]
 
-  const [formData, setFormData] = useState<formDataInterface>({
-    pwd: '',
-    pseudo: '',
-    email: '',
-  })
+  // const [formData, setFormData] = useState<formDataInterface>({
+  //   pwd: '',
+  //   pseudo: '',
+  //   email: '',
+  // })
 
   const [showToast, setShowToast] = useState(false)
   const [typeToast, setTypeToast] = useState('')
@@ -55,13 +55,30 @@ export default function SignupForm() {
   const navigate = useNavigate()
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const test = document.querySelectorAll('form')[0]
+
+    let array = []
+    for (let i = 0; i < 3; i++) {
+      array.push((test[i] as HTMLInputElement).value)
+    }
+
+    const data = {
+      email: array[0],
+      pseudo: array[1],
+      pwd: array[2],
+    }
+
+    // setFormData(filsdepute)
+
+    console.log(array)
+
     e.preventDefault()
 
     fetch('http://localhost:4557/api/signUp', {
       method: 'POST',
       mode: 'cors',
       body: new URLSearchParams({
-        ...formData,
+        ...data,
       }),
       credentials: 'include',
       headers: new Headers({
@@ -83,13 +100,13 @@ export default function SignupForm() {
   }
 
   const handleChange = (e: ChangeEvent) => {
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        // @ts-ignore
-        [e.target.name]: e.target.value,
-      }
-    })
+    // setFormData((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     // @ts-ignore
+    //     [e.target.name]: e.target.value,
+    //   }
+    // })
   }
 
   return (
@@ -101,7 +118,7 @@ export default function SignupForm() {
             label={input.label}
             type={input.type}
             name={input.name}
-            placeholder={input.placeHolder}
+            placeholder={input.placeholder}
             onChange={handleChange}
           />
         ))}
