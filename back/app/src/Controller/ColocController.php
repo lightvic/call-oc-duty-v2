@@ -89,7 +89,12 @@ class colocController extends Controller
         }*/
 
         $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
-        $users = $_POST['users'];
+        $users = [];
+        foreach (array_keys($_POST) as $post_key) {
+            if (str_starts_with($post_key, 'users')) {
+                array_push($users, $_POST[$post_key]);
+            }
+        }
         $colocArgs = [
             'address' => $_POST['address'],
             'town' => $_POST['town'],

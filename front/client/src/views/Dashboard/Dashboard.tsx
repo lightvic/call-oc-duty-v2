@@ -1,9 +1,4 @@
-import {
-  FilterButton,
-  Menu,
-  PurchasesContainer,
-  RedirectButton,
-} from '../../components'
+import { FilterButton, Menu } from '../../components'
 
 export default function Dashboard() {
   const filters = [

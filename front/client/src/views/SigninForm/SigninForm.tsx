@@ -47,7 +47,6 @@ export default function SigninForm() {
           type={input.type}
           name={input.name}
           placeholder={input.placeholder}
-          onChange={handleChange}
         />
       ))}
       <button type="submit">Se connecter</button>

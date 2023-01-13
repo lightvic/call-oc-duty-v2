@@ -55,15 +55,6 @@ export default function SettingsForm() {
     pseudo: '',
     email: '',
   })
-  const handleChange = (e: ChangeEvent) => {
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        // @ts-ignore
-        [e.target.name]: e.target.value,
-      }
-    })
-  }
 
   return (
     <>
@@ -73,7 +64,6 @@ export default function SettingsForm() {
           type={emailInput.type}
           name={emailInput.name}
           placeholder={emailInput.placeholder}
-          onChange={handleChange}
         />
         <button type="submit">Valider</button>
       </form>
@@ -83,7 +73,6 @@ export default function SettingsForm() {
           type={pseudoInput.type}
           name={pseudoInput.name}
           placeholder={pseudoInput.placeholder}
-          onChange={handleChange}
         />
         <button type="submit">Valider</button>
       </form>
@@ -95,7 +84,6 @@ export default function SettingsForm() {
             type={pwdInput.type}
             name={pwdInput.name}
             placeholder={pwdInput.placeholder}
-            onChange={handleChange}
           />
         ))}
         <button type="submit">Valider</button>
@@ -106,7 +94,6 @@ export default function SettingsForm() {
           type={profilePicInput.type}
           name={profilePicInput.name}
           placeholder={profilePicInput.placeholder}
-          onChange={handleChange}
         />
         <button type="submit">Valider</button>
       </form>
