@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { IconLogout } from '../../../assets'
 
 export default function UserInfoContainer({
@@ -10,6 +11,12 @@ export default function UserInfoContainer({
   userName: string
   userMail: string
 }) {
+  const navigate = useNavigate()
+  const logout = () => {
+    sessionStorage.removeItem('token')
+    navigate('/signin')
+  }
+
   return (
     <div>
       <div className="bar"></div>
@@ -21,7 +28,7 @@ export default function UserInfoContainer({
             <p className="user-info__email">{userMail}</p>
           </div>
         </button>
-        <button className="logout">
+        <button className="logout" onClick={logout}>
           <IconLogout />
         </button>
       </div>
