@@ -10,15 +10,19 @@ export default function Dashboard() {
 	const filters = [
 		{
 			value: '12 mois',
+			timeLimit: 365,
 		},
 		{
 			value: '30 jours',
+			timeLimit: 30,
 		},
 		{
 			value: '7 jours',
+			timeLimit: 7,
 		},
 		{
 			value: '24 heures',
+			timeLimit: 1,
 		},
 	]
 	const currentUser = jwt_decode(sessionStorage.token)
