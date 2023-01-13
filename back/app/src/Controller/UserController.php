@@ -14,7 +14,7 @@ class UserController extends Controller
     public function login()
     {
         $mail = $_POST['email'];
-        $password = $_POST['password'];
+        $password = $_POST['pwd'];
 
         $userRepository = new UserRepository(new PDOFactory());
         $user = $userRepository->getUserByMail($mail);

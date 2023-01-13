@@ -15,6 +15,7 @@ function App() {
         <Route path="/todolist" element={<InProgress />} />
         <Route path="/chat" element={<InProgress />} />
         <Route path="/signup" element={<SignupForm />} />
+        <Route path="/signin" element={<SigninForm />} />
       </Routes>
     </div>
   )
