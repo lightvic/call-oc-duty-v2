@@ -72,16 +72,9 @@ class UserController extends Controller
     #[Route('/api/updateUserProfile', 'update', ['POST'])]
     public function update()
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "Token invalide"
-            ]);
-            die;
-        }*/
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
         $userRepository = new UserRepository(new PDOFactory());
         $user = $userRepository->getUserByUuid($currentUser);
 
@@ -136,19 +129,12 @@ class UserController extends Controller
     #[Route('/api/deleteUser', 'delete user', ['POST'])]
     public function deleteUser()
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "Token invalide"
-            ]);
-            die;
-        }
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
         $userRepository = new UserRepository(new PDOFactory());
-        if ($_POST['uuid']) {
-            $uuid = $_POST['uuid'];
-            $userRepository->delete($uuid);
+        if ($currentUser) {
+            $userRepository->delete($currentUser);
 
             $this->renderJSON([
                 'success' => 'supression du user effectuée avec succès'

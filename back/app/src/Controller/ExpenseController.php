@@ -5,22 +5,16 @@ namespace App\Controller;
 use App\Model\Factory\PDOFactory;
 use App\Model\Repository\ExpenseRepository;
 use App\Route\Route;
+use App\Services\JWTHelper;
 
 class ExpenseController extends Controller
 {
     #[Route('/api/unFixExpense/{colocUuid}&{limitDate}', 'unfix expense', ['GET'])]
     public function unfixExpense($colocUuid, $limitDate)
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
         $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
         $unfixExpense = $expenseRepository->getAllUnfixExpenseByColocUuid($colocUuid, $date);
@@ -41,16 +35,9 @@ class ExpenseController extends Controller
     #[Route('/api/fixExpense/{colocUuid}&{limitDate}', 'fix expense', ['GET'])]
     public function fixExpense($colocUuid, $limitDate)
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
         $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
         $unfixExpense = $expenseRepository->getAllfixExpenseByColocUuid($colocUuid, $date);

@@ -2,6 +2,8 @@
 
     namespace App\Controller;
 
+    use App\Services\JWTHelper;
+
     abstract class Controller
     {
         public function __construct(string $action, array $params = [])
@@ -57,6 +59,19 @@
 
                 mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
             );
+        }
+
+        public function checkJwtAndGetUser($cred)
+        {
+            $token = JWTHelper::decodeJWT($cred);
+            if (!$token) {
+                $this->renderJSON([
+                    "message" => "invalid cred"
+                ]);
+                die;
+            }
+
+            return $token->uuid;
         }
 
         public function renderJSON($content)
