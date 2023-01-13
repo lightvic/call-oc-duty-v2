@@ -5,12 +5,16 @@ export default function FilterButton({
 }: {
   filters: {
     value: string
-	timeLimit: number
+	  timeLimit: number
   }[]
 }) {
   const [selectedFilter, setSelectedFilter] = useState('12 mois')
   const getFilter = (e: React.MouseEvent<HTMLInputElement>) => {
 	setSelectedFilter(e.currentTarget.innerHTML)
+  e.currentTarget.getAttribute('data-time-limit')
+  const date ={value : e.currentTarget.innerHTML, limit: e.currentTarget.getAttribute('data-time-limit')}
+  sessionStorage.setItem('date', JSON.stringify(date))
+  console.log(sessionStorage.date['value'])
   }
 
   return (

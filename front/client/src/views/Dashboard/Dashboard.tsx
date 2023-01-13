@@ -26,6 +26,9 @@ export default function Dashboard() {
 		},
 	]
 	const currentUser = jwt_decode(sessionStorage.token)
+	// const date ={value : "12 mois", limit: 30 }
+	// sessionStorage.setItem('date', JSON.stringify(date))
+	// console.log(sessionStorage.date)
 	return (
 		<>
 			<Menu />
