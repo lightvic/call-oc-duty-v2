@@ -109,6 +109,10 @@ class UserController extends Controller
             $user->setPwd($newPassword, true);
         }
 
+        if ($_POST['pseudo'] != null) {
+            $user->setPseudo($_POST['pseudo']);
+        }
+
         $file = null;
         if ($_FILES['fileToUpload']['name']) {
             $fileName = $this->MakeUuid() . '.' . strtolower(pathinfo($_FILES["fileToUpload"]['name'],PATHINFO_EXTENSION));

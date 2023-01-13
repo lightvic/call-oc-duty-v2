@@ -14,13 +14,15 @@ class ExpenseRepository extends Repository
     public function getAllUnfixExpenseByColocUuid(string $colocUuid, string $limitDate): ?array
     {
         $expense =
-            'SELECT name, value, type, date, fix, token
-            FROM `expenses`
-            WHERE `coloc_uuid` = :colocUuid
-            AND `fix` IS FALSE
-            AND `date` > :limit
-            AND `value` > 0
-            ORDER BY `date` DESC';
+            'SELECT u.pseudo, u.picture, e.name, e.value, e.type, e.date, e.fix, e.token
+            FROM `expenses` e
+            INNER JOIN users u ON e.user_uuid = u.uuid
+            WHERE e.`coloc_uuid` = :colocUuid
+            AND e.`fix` = 0
+            AND date BETWEEN :limit AND NOW()
+            AND e.`value` > 0
+            AND type = "Achat"
+            ORDER BY e.`date` DESC';
 
         $query = $this->pdo->prepare($expense);
         $query->bindValue(":colocUuid", $colocUuid);
@@ -28,7 +30,7 @@ class ExpenseRepository extends Repository
         $query->execute();
         $expenses = [];
         while ($result = $query->fetch(\PDO::FETCH_ASSOC)) {
-            $expenses[] = new Expense($result);
+            $expenses[] = $result;
         }
         if (count($expenses) > 0) {
             return $expenses;
@@ -47,10 +49,11 @@ class ExpenseRepository extends Repository
             'SELECT u.pseudo, u.picture, e.name, e.value, e.type, e.date, e.fix, e.token
             FROM `expenses` e
             INNER JOIN users u ON e.user_uuid = u.uuid
-            WHERE `coloc_uuid` = :colocUuid
-            AND e.`fix` IS TRUE
-            AND e.`date` >= :limit
+            WHERE e.`coloc_uuid` = :colocUuid
+            AND e.`fix` = 1
+            AND date BETWEEN :limit AND NOW()
             AND e.`value` > 0
+            AND type = "Achat"
             ORDER BY e.`date` DESC';
 
         $query = $this->pdo->prepare($expense);
