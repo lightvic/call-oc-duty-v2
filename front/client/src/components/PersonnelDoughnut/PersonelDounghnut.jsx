@@ -1,22 +1,59 @@
-import React, { PureComponent } from 'react';
+import { $CombinedState } from '@reduxjs/toolkit';
+import React, { PureComponent, useEffect, useState } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { name: 'Courses', value: 100 },
-  { name: 'Charges/Loyer', value: 300 },
-  { name: 'Soirée', value: 300 },
-  { name: 'Abonnements', value: 200 },
-  { name: 'Nécessités', value: 200 },
-  { name: 'Autres', value: 200 },
-];
-console.log(data[1].name)
-console.log(data[1].value)
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#73BFB8','#E8FCCF'];
+// #[Route('/api/colocStat/{colocUuid}&{limitDate}', 'colocStat', ['GET'])] => route à envoyer
 
-export default class PersonelDounghnut extends PureComponent {
-  render() {
+
+export default function PersonelDounghnut() {
+  const [expenses, setExpense]= useState()
+  useEffect(() => {
+    fetch('http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd6&365', {
+      method: "GET",
+      headers: new Headers({
+        "Authorization" : "Basic amZnbWFpbC5jb206cGFzc3dvcmQ=",
+        "Content-type":  "application/x-www-form-urlencoded"
+    })
+  })
+    .then(data => data.json())
+    .then(json => setExpense(json.userExpense))
+  },[]);
+
+  if (expenses != null){
+    const COLORS = []
+    const data = [{ name: 'Nécessités', value: 200 },]
+    console.log(expenses)
+
+    expenses.map((expenses,index) => (
+      data.push({name: expenses.category, value: parseInt(expenses.value)})
+    ));
+    
+    data.forEach((category)=>{
+      if (category.name === 'Charges/Loyer'){
+        COLORS.push('#0088FE')
+      }
+      if (category.name === 'Courses'){
+        COLORS.push('#00C49F')
+      }
+      if (category.name === 'Soirées'){
+        COLORS.push('#FFBB28')
+      }
+      if (category.name === 'Abonnements'){
+        COLORS.push('#FF8042')
+      }
+      if (category.name === 'Nécessités'){
+        COLORS.push('#73BFB8')
+      }
+      if (category.name === 'Autres'){
+        COLORS.push('#E8FCCF')
+      }
+    })
+
+    console.log(COLORS)
+    // const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#73BFB8','#E8FCCF'];    
+    
     return (
-        <div>
+      <div>
         <PieChart width={800} height={400} >
             <Pie
             data={data}
@@ -28,12 +65,15 @@ export default class PersonelDounghnut extends PureComponent {
             dataKey="value"
             >
             {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))};
             </Pie>
         </PieChart>
       </div>
     );
   }
-}
+  else{
+    return null;
+  }
+};
 

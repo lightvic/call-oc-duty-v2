@@ -6,6 +6,8 @@ import store from './store/store'
 // import { Provider } from 'react-redux'
 
 import { BrowserRouter } from 'react-router-dom'
+import PersonelDounghnut from './components/PersonnelDoughnut/PersonelDounghnut'
+import ColocDounghnut from './components/ColocDoughnut/ColocDounghnut'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
