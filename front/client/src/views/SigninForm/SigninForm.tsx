@@ -62,9 +62,7 @@ export default function SigninForm() {
 		fetch('http://localhost:4557/api/login', {
 			method: 'POST',
 			mode: 'cors',
-			body: new URLSearchParams({
-				...data,
-			}),
+			body: JSON.stringify(data),
 			credentials: 'include',
 			headers: new Headers({
 				Authorization: 'Basic amZnbWFpbC5jb206cGFzc3dvcmQ=',
@@ -83,16 +81,6 @@ export default function SigninForm() {
 		})
 	}
 
-	const handleChange = (e: ChangeEvent) => {
-		// setFormData((prevState) => {
-		// 	return {
-		// 		...prevState,
-		// 		// @ts-ignore
-		// 		[e.target.name]: e.target.value,
-		// 	}
-		// })
-	}
-
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
@@ -103,7 +91,6 @@ export default function SigninForm() {
 						type={input.type}
 						name={input.name}
 						placeholder={input.placeholder}
-						onChange={handleChange}
 					/>
 				))}
 				<button type="submit">Se connecter</button>

@@ -76,16 +76,15 @@ export default function SignupForm() {
 			'Content-type': 'application/json',
 		  }),
 		})
-      	.then((data) => data.text())
+      	.then((data) => data.json())
       	.then((json) => {
-			console.log(json)
-			/*if (json.token) {
+			if (json.token) {
 			  sessionStorage.setItem('token', JSON.stringify(json))
 			  navigate('/select-coloc')
 			}
 			setShowToast((showToast) => !showToast)
 			setTypeToast('error')
-			setMessageToast({ isError: true, message: json.error }.message)*/
+			setMessageToast({ isError: true, message: json.error }.message)
       	})
   	}
 
