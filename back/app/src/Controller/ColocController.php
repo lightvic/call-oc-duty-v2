@@ -19,15 +19,9 @@ class colocController extends Controller
     #[Route('/api/colocSection', 'colocSection', ['GET'])]
     public function colocSection()
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
+
         $colocRepository = new ColocRepository(new PDOFactory());
         $colocs = $colocRepository->getAllColocByUserId($currentUser);
 
@@ -47,18 +41,12 @@ class colocController extends Controller
     #[Route('/api/colocStat/{colocUuid}&{limitDate}', 'colocStat', ['GET'])]
     public function colocStat($colocUuid, $limitDate)
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
-        $userUuid = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
+
         $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
-        $userExpense = $expenseRepository->getAllExpenseByColocAndUserAndDateLimit($colocUuid, $userUuid, $date);
+        $userExpense = $expenseRepository->getAllExpenseByColocAndUserAndDateLimit($colocUuid, $currentUser, $date);
         $colocExpense = $expenseRepository->getAllExpenseByColocUuidAndDateLimit($colocUuid, $date);
 
         if($userExpense && $colocExpense) {
@@ -79,18 +67,12 @@ class colocController extends Controller
     #[Route('/api/newColoc', 'new coloc', ['POST'])]
     public function newColoc()
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
         $users = $_POST['users'];
         $colocArgs = [
+            'name' => $_POST['name'],
             'address' => $_POST['address'],
             'town' => $_POST['town'],
             'post_code' => $_POST['post_code']
@@ -113,14 +95,14 @@ class colocController extends Controller
 
             }
 
-            $colocArgs = [
+            $userColocArgs = [
                 'uuid' => $this->MakeUuid(),
                 'user_uuid' => $newUser->getUuid(),
                 'coloc_uuid' => $colocUuid,
                 'admin' => $admin
             ];
 
-            $newUserColoc = new UserColoc($colocArgs);
+            $newUserColoc = new UserColoc($userColocArgs);
             $userColocRepository = new UserColocRepository(new PDOFactory());
             $newUserColoc = $userColocRepository->insertUserColoc($newUserColoc);
 
@@ -145,16 +127,9 @@ class colocController extends Controller
     #[Route('/api/modifyInfo/{colocUuid}', 'modify info', ['GET'])]
     public function modifyInfo($colocUuid)
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
         $userRepository = new UserRepository(new PDOFactory());
         $users = $userRepository->getAllUsersByCollocUuid($colocUuid);
 
@@ -178,16 +153,9 @@ class colocController extends Controller
     #[Route('/api/modifyColoc/{colocUuid}', 'modify coloc', ['POST'])]
     public function modifyColoc($colocUuid)
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
         $userColocRepository = new UserColocRepository(new PDOFactory());
         $admin = $userColocRepository->getAdminByColocUuid($colocUuid);
 
@@ -204,6 +172,9 @@ class colocController extends Controller
 
         if ($_POST['address'] != null) {
             $coloc->setAddress($_POST['address']);
+        }
+        if ($_POST['name'] != null) {
+            $coloc->setName($_POST['name']);
         }
         if ($_POST['post_code'] != null) {
             $coloc->setPostCode($_POST['post_code']);
@@ -236,16 +207,9 @@ class colocController extends Controller
     #[Route('/api/deleteUserFromColoc/{userUuid}&{colocUuid}', 'delete_user from coloc', ['POST'])]
     public function deleteUserFromColoc($userUuid, $colocUuid)
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $currentUser = 'd2da2a15-b22c-4403-ad33-345f0f59ad03';
         $userColocRepository = new UserColocRepository(new PDOFactory());
         $admin = $userColocRepository->getAdminByColocUuid($colocUuid);
 
@@ -276,16 +240,9 @@ class colocController extends Controller
     #[Route('/api/deleteColoc/{colocUuid}', 'delete coloc', ['POST'])]
     public function deleteColoc($colocUuid)
     {
-        /*$cred = str_replace("Bearer ", "", getallheaders()['authorization']);
-        $token = JWTHelper::decodeJWT($cred);
-        if (!$token) {
-            $this->renderJSON([
-                "message" => "invalid cred"
-            ]);
-            die;
-        }*/
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $currentUser = '4aad1ecd-77cd-48cf-bbe1-b101868f69a8';
         $userColocRepository = new UserColocRepository(new PDOFactory());
         $admin = $userColocRepository->getAdminByColocUuid($colocUuid);
 
@@ -299,6 +256,52 @@ class colocController extends Controller
 
         $colocRepository = new ColocRepository(new PDOFactory());
         $colocRepository->delete($colocUuid);
+
+        $this->renderJSON([
+            'success' => 'mise à jour du user effectuée avec succès'
+        ]);
+        die();
+    }
+
+    #[Route('/api/addUserToColoc/{colocUuid}', 'add user to coloc', ['POST'])]
+    public function addUserToColoc($colocUuid)
+    {
+        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $currentUser = $this->checkJwtAndGetUser($cred);
+
+        $userColocRepository = new UserColocRepository(new PDOFactory());
+        $admin = $userColocRepository->getAdminByColocUuid($colocUuid);
+
+        if ($admin['user_uuid'] !== $currentUser) {
+            $this->renderJSON([
+                "error" => 'Vous n\'étes pas admin'
+            ]);
+            http_response_code(200);
+            die;
+        }
+
+        $userMail = $_POST['email'];
+        $userRepository = new UserRepository(new PDOFactory());
+        $user = $userRepository->getUserByMail($userMail);
+
+        $userColoc = $userColocRepository->getUserColocByUserUuidAndColocUuid($user->getUuid(), $colocUuid);
+
+        if ($userColoc) {
+            $this->renderJSON([
+                "error" => 'aucun user avec cette email'
+            ]);
+            http_response_code(200);
+            die;
+        }
+
+        $userColocArgs = [
+            'uuid' => $this->MakeUuid(),
+            'user_uuid' => $user->getUuid(),
+            'coloc_uuid' => $colocUuid
+        ];
+
+        $userColoc = new UserColoc($userColocArgs);
+        $userColocRepository->insertUserColoc($userColoc);
 
         $this->renderJSON([
             'success' => 'mise à jour du user effectuée avec succès'

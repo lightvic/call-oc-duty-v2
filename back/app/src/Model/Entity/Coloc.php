@@ -4,6 +4,7 @@ namespace App\Model\Entity;
 
 class Coloc extends BaseEntity
 {
+    private ?string $name = null;
     private ?string $address = null;
     private ?int $postCode = null;
     private ?string $town = null;
@@ -80,4 +81,21 @@ class Coloc extends BaseEntity
         $this->picture = $picture;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
+
 }

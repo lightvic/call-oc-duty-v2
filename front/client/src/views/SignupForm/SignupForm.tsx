@@ -4,111 +4,126 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export interface formDataInterface {
-  pseudo: string
-  email: string
-  pwd: string
+	pseudo: string
+	email: string
+	pwd: string
 }
 
 export interface Ierror {
-  isError: boolean
-  message: string
+	isError: boolean
+	message: string
 }
 
 export default function SignupForm() {
-  const inputs = [
-    {
-      label: 'Email',
-      type: 'email',
-      name: 'email',
-      placeHolder: 'ex : jean.martin@bidule.com',
-    },
-    {
-      label: 'Pseudo',
-      type: 'text',
-      name: 'pseudo',
-      placeHolder: 'JeanMartin90',
-    },
-    {
-      label: 'Mot de passe',
-      type: 'pwd',
-      name: 'password',
-      placeHolder: 'Conseil : 8 caractères min',
-    },
-    {
-      label: 'Confirmer le mot de passe',
-      type: 'password',
-      name: 'confirmPassword',
-      placeHolder: 'Confirmez votre mot de passe',
-    },
-  ]
+	const inputs = [
+		{
+			label: 'Email',
+			type: 'email',
+			name: 'email',
+			placeholder: 'ex : jean.martin@bidule.com',
+		},
+		{
+			label: 'Pseudo',
+			type: 'text',
+			name: 'pseudo',
+			placeholder: 'JeanMartin90',
+		},
+		{
+			label: 'Mot de passe',
+			type: 'password',
+			name: 'pwd',
+			placeholder: 'Conseil : 8 caractères min',
+		},
+		{
+			label: 'Confirmer le mot de passe',
+			type: 'password',
+			name: 'confirmPassword',
+			placeholder: 'Confirmez votre mot de passe',
+		},
+	]
 
-  const [formData, setFormData] = useState<formDataInterface>({
-    pwd: '',
-    pseudo: '',
-    email: '',
-  })
+	// const [formData, setFormData] = useState<formDataInterface>({
+	// 	pwd: '',
+	// 	pseudo: '',
+	// 	email: '',
+	// })
 
-  const [showToast, setShowToast] = useState(false)
-  const [typeToast, setTypeToast] = useState('')
-  const [messageToast, setMessageToast] = useState('')
+	const [showToast, setShowToast] = useState(false)
+	const [typeToast, setTypeToast] = useState('')
+	const [messageToast, setMessageToast] = useState('')
 
-  const navigate = useNavigate()
+	const navigate = useNavigate()
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+		const test = document.querySelectorAll('form')[0]
 
-    fetch('http://localhost:4557/api/signUp', {
-      method: 'POST',
-      mode: 'cors',
-      body: new URLSearchParams({
-        ...formData,
-      }),
-      credentials: 'include',
-      headers: new Headers({
-        Authorization: 'Basic amZnbWFpbC5jb206cGFzc3dvcmQ=',
-        'Content-type': 'application/x-www-form-urlencoded',
-      }),
-    })
-      .then((data) => data.json())
+		let array = []
+		for (let i = 0; i < 3; i++) {
+			array.push((test[i] as HTMLInputElement).value)
+		}
 
-      .then((json) => {
-        if (json.token) {
-          sessionStorage.setItem('token', JSON.stringify(json))
-          navigate('/dashboard')
-        }
-        setShowToast((showToast) => !showToast)
-        setTypeToast('error')
-        setMessageToast({ isError: true, message: json.error }.message)
-      })
-  }
+		const data = {
+			email: array[0],
+			pseudo: array[1],
+			pwd: array[2],
+		}
 
-  const handleChange = (e: ChangeEvent) => {
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        // @ts-ignore
-        [e.target.name]: e.target.value,
-      }
-    })
-  }
+		// setFormData(filsdepute)
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        {inputs.map((input, i) => (
-          <InputForm
-            key={i}
-            label={input.label}
-            type={input.type}
-            name={input.name}
-            placeholder={input.placeHolder}
-            onChange={handleChange}
-          />
-        ))}
-        <button type="submit">S'inscrire</button>
-      </form>
+		console.log(array)
 
-      <Toast show={showToast} type={typeToast} message={messageToast} />
-    </>
-  )
+		e.preventDefault()
+
+		fetch('http://localhost:4557/api/signUp', {
+			method: 'POST',
+			mode: 'cors',
+			body: new URLSearchParams({
+				...data,
+			}),
+			credentials: 'include',
+			headers: new Headers({
+				Authorization: 'Basic amZnbWFpbC5jb206cGFzc3dvcmQ=',
+				'Content-type': 'application/x-www-form-urlencoded',
+			}),
+		})
+		.then((data) => data.json())
+		.then((json) => {
+			if (json.token) {
+				sessionStorage.setItem('token', JSON.stringify(json))
+				navigate('/dashboard')
+			}
+			setShowToast((showToast) => !showToast)
+			setTypeToast('error')
+			setMessageToast({ isError: true, message: json.error }.message)
+		})
+	}
+
+  	const handleChange = (e: ChangeEvent) => {
+		// setFormData((prevState) => {
+		//   return {
+		//     ...prevState,
+		//     // @ts-ignore
+		//     [e.target.name]: e.target.value,
+		//   }
+		// })
+  	}
+
+	return (
+		<>
+			<form onSubmit={handleSubmit}>
+				{inputs.map((input, i) => (
+					<InputForm
+						key={i}
+						label={input.label}
+						type={input.type}
+						name={input.name}
+						placeholder={input.placeholder}
+						onChange={handleChange}
+					/>
+				))}
+				<button type="submit">S'inscrire</button>
+			</form>
+			<Toast show={showToast} type={typeToast} message={messageToast} />
+		</>
+	)
 }

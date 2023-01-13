@@ -4,6 +4,7 @@ import {
   ButtonWithIcon,
   UserInfoContainer,
 } from '../index'
+import jwt_decode from "jwt-decode"
 
 export default function Menu() {
   const menuButtons = [
@@ -41,6 +42,7 @@ export default function Menu() {
 
   const windowLocation = window.location.pathname.split('/')[1]
   console.log(windowLocation)
+  const currentUser = jwt_decode(sessionStorage.token)
 
   return (
     <div className="menu-container">
@@ -62,8 +64,8 @@ export default function Menu() {
 
       <UserInfoContainer
         userSrc={'/img.jpeg'}
-        userName={'Anthony Ringressi'}
-        userMail={'anthony.ringressi@hotmail.fr'}
+        userName={(currentUser as any).pseudo}
+        userMail={(currentUser as any).email}
       />
     </div>
   )
