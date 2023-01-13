@@ -4,7 +4,8 @@ import {
   PurchasesContainer,
   RedirectButton,
 } from '../../components'
-import jwt_decode from 'jwt-decode'
+import jwt_decode from "jwt-decode"
+import NewExpenseForm from '../NewExpenseForm/NewExpenseForm'
 
 export default function Dashboard() {
   const filters = [
@@ -35,12 +36,15 @@ export default function Dashboard() {
           <p>Bon retour, {(currentUser as any).pseudo} !</p>
         </div>
 
-        <div className="dashboard-buttons">
-          <FilterButton filters={filters} />
-          {/* <RedirectButton src={''} name={'Filter button'} type={'primary'} /> */}
-        </div>
-        {/* <PurchasesContainer /> */}
-      </div>
-    </>
-  )
+				<div className="dashboard-buttons">
+					<FilterButton filters={filters} />
+					{/* <RedirectButton src={''} name={'Filter button'} type={'primary'} /> */}
+				</div>
+				{/* <PurchasesContainer /> */}
+				<br/>
+				{/* Test val */}
+				<NewExpenseForm/>
+			</div>
+		</>
+	)
 }
