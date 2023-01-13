@@ -1,5 +1,6 @@
 import React from 'react'
-import { InputForm, Toast } from '../../components'
+import { Toast } from '../../components'
+import { InputForm } from '../../components'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -42,24 +43,20 @@ export default function SignupForm() {
 		},
 	]
 
-	// const [formData, setFormData] = useState<formDataInterface>({
-	// 	pwd: '',
-	// 	pseudo: '',
-	// 	email: '',
-	// })
-
 	const [showToast, setShowToast] = useState(false)
 	const [typeToast, setTypeToast] = useState('')
 	const [messageToast, setMessageToast] = useState('')
 
 	const navigate = useNavigate()
 
+
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-		const test = document.querySelectorAll('form')[0]
+		e.preventDefault()
+		const form = document.querySelectorAll('form')[0]
 
 		let array = []
 		for (let i = 0; i < 3; i++) {
-			array.push((test[i] as HTMLInputElement).value)
+			array.push((form[i] as HTMLInputElement).value)
 		}
 
 		const data = {
@@ -67,45 +64,26 @@ export default function SignupForm() {
 			pseudo: array[1],
 			pwd: array[2],
 		}
-
-		// setFormData(filsdepute)
-
-		console.log(array)
-
-		e.preventDefault()
-
 		fetch('http://localhost:4557/api/signUp', {
-			method: 'POST',
-			mode: 'cors',
-			body: new URLSearchParams({
-				...data,
-			}),
-			credentials: 'include',
-			headers: new Headers({
-				Authorization: 'Basic amZnbWFpbC5jb206cGFzc3dvcmQ=',
-				'Content-type': 'application/x-www-form-urlencoded',
-			}),
+		  method: 'POST',
+		  mode: 'cors',
+		  body: JSON.stringify(data),
+		  credentials: 'include',
+		  headers: new Headers({
+			Authorization: 'Basic amZnbWFpbC5jb206cGFzc3dvcmQ=',
+			'Content-type': 'application/json',
+		  }),
 		})
-		.then((data) => data.json())
-		.then((json) => {
+      	.then((data) => data.json())
+      	.then((json) => {
 			if (json.token) {
-				sessionStorage.setItem('token', JSON.stringify(json))
-				navigate('/dashboard')
+			  sessionStorage.setItem('token', JSON.stringify(json))
+			  navigate('/select-coloc')
 			}
 			setShowToast((showToast) => !showToast)
 			setTypeToast('error')
 			setMessageToast({ isError: true, message: json.error }.message)
-		})
-	}
-
-  	const handleChange = (e: ChangeEvent) => {
-		// setFormData((prevState) => {
-		//   return {
-		//     ...prevState,
-		//     // @ts-ignore
-		//     [e.target.name]: e.target.value,
-		//   }
-		// })
+      	})
   	}
 
 	return (
@@ -118,7 +96,6 @@ export default function SignupForm() {
 						type={input.type}
 						name={input.name}
 						placeholder={input.placeholder}
-						onChange={handleChange}
 					/>
 				))}
 				<button type="submit">S'inscrire</button>

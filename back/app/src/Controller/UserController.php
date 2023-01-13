@@ -13,8 +13,10 @@ class UserController extends Controller
     #[Route('/api/login', name: 'login', methods: ['POST'])]
     public function login()
     {
-        $mail = $_POST['email'];
-        $password = $_POST['pwd'];
+        $response = (array) json_decode(file_get_contents('php://input'));
+
+        $mail = $response['email'];
+        $password = $response['pwd'];
 
         $userRepository = new UserRepository(new PDOFactory());
         $user = $userRepository->getUserByMail($mail);
@@ -36,12 +38,14 @@ class UserController extends Controller
     #[ROUTE('/api/signUp', 'signup', ['POST'])]
     public function signUp()
     {
-        $mail = $_POST['email'];
+        $response = (array) json_decode(file_get_contents('php://input'));
+
+        $mail = $response['email'];
 
         $userRepository = new UserRepository(new PDOFactory());
         $user = $userRepository->getUserByMail($mail);
         if (!isset($user)) {
-            $user = new User($_POST);
+            $user = new User($response);
             $uuid = $this->makeUuid();
             $user->setUuid($uuid);
             $user = $userRepository->insert($user);
@@ -58,28 +62,19 @@ class UserController extends Controller
         die();
     }
 
-    /* useless until it's not */
-    /*#[Route('/api/signOut', 'signout', ['POST'])]
-    public function signout()
-    {
-        if($_SERVER["REQUEST_METHOD"] === "POST") {
-            unset($_SESSION["user"]);
-            http_response_code(200);
-        }
-        exit();
-    }*/
-
     #[Route('/api/updateUserProfile', 'update', ['POST'])]
     public function update()
     {
+        $response = (array) json_decode(file_get_contents('php://input'));
+
         $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
         $currentUser = $this->checkJwtAndGetUser($cred);
 
         $userRepository = new UserRepository(new PDOFactory());
         $user = $userRepository->getUserByUuid($currentUser);
 
-        if ($_POST['email'] != null) {
-            $email = $_POST['email'];
+        if ($response['email'] != null) {
+            $email = $response['email'];
             $existMail = $userRepository->getUserByMail($email);
             if ($existMail) {
                 $this->renderJSON([
@@ -90,9 +85,9 @@ class UserController extends Controller
             $user->setEmail($email);
         }
 
-        if ($_POST['oldPassword'] != null && $_POST['newPassword'] != null) {
-            $oldPassword = $_POST['oldPassword'];
-            $newPassword = $_POST['newPassword'];
+        if ($response['oldPassword'] != null && $response['newPassword'] != null) {
+            $oldPassword = $response['oldPassword'];
+            $newPassword = $response['newPassword'];
             if (!$user->verifyPassword($oldPassword)) {
                 $this->renderJSON([
                     'error' => 'Mot de passe incorrect'
@@ -102,8 +97,8 @@ class UserController extends Controller
             $user->setPwd($newPassword, true);
         }
 
-        if ($_POST['pseudo'] != null) {
-            $user->setPseudo($_POST['pseudo']);
+        if ($response['pseudo'] != null) {
+            $user->setPseudo($response['pseudo']);
         }
 
         $file = null;

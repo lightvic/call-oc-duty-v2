@@ -67,15 +67,17 @@ class colocController extends Controller
     #[Route('/api/newColoc', 'new coloc', ['POST'])]
     public function newColoc()
     {
+        $response = (array) json_decode(file_get_contents('php://input'));
+
         $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
         $currentUser = $this->checkJwtAndGetUser($cred);
 
-        $users = $_POST['users'];
+        $users = $response['users'];
         $colocArgs = [
-            'name' => $_POST['name'],
-            'address' => $_POST['address'],
-            'town' => $_POST['town'],
-            'post_code' => $_POST['post_code']
+            'name' => $response['name'],
+            'address' => $response['address'],
+            'town' => $response['town'],
+            'post_code' => $response['post_code']
         ];
 
         $colocRepository = new ColocRepository(new PDOFactory());
@@ -153,6 +155,8 @@ class colocController extends Controller
     #[Route('/api/modifyColoc/{colocUuid}', 'modify coloc', ['POST'])]
     public function modifyColoc($colocUuid)
     {
+        $response = (array) json_decode(file_get_contents('php://input'));
+
         $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
         $currentUser = $this->checkJwtAndGetUser($cred);
 
@@ -170,17 +174,17 @@ class colocController extends Controller
         $colocRepository = new ColocRepository(new PDOFactory());
         $coloc = $colocRepository->getColocByUuid($colocUuid);
 
-        if ($_POST['address'] != null) {
-            $coloc->setAddress($_POST['address']);
+        if ($response['address'] != null) {
+            $coloc->setAddress($response['address']);
         }
-        if ($_POST['name'] != null) {
-            $coloc->setName($_POST['name']);
+        if ($response['name'] != null) {
+            $coloc->setName($response['name']);
         }
-        if ($_POST['post_code'] != null) {
-            $coloc->setPostCode($_POST['post_code']);
+        if ($response['post_code'] != null) {
+            $coloc->setPostCode($response['post_code']);
         }
-        if ($_POST['town'] != null) {
-            $coloc->setTown($_POST['town']);
+        if ($response['town'] != null) {
+            $coloc->setTown($response['town']);
         }
 
         $file = null;
@@ -266,6 +270,8 @@ class colocController extends Controller
     #[Route('/api/addUserToColoc/{colocUuid}', 'add user to coloc', ['POST'])]
     public function addUserToColoc($colocUuid)
     {
+        $response = (array) json_decode(file_get_contents('php://input'));
+
         $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
         $currentUser = $this->checkJwtAndGetUser($cred);
 
@@ -280,7 +286,7 @@ class colocController extends Controller
             die;
         }
 
-        $userMail = $_POST['email'];
+        $userMail = $response['email'];
         $userRepository = new UserRepository(new PDOFactory());
         $user = $userRepository->getUserByMail($userMail);
 
