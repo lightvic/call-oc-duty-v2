@@ -155,7 +155,7 @@ class ExpenseRepository extends Repository
         return null;
     }
 
-    public function insertExpense(Expense $expense): string
+    public function insertExpense(Expense $expense): bool
     {
         $newExpense =
             'INSERT INTO `expenses` (uuid, name, value, type, date, user_uuid, coloc_uuid, fix, token)
