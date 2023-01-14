@@ -5,7 +5,7 @@ export default function Repayment(){
   const token = JSON.parse(sessionStorage.token)
   const navigate = useNavigate()
 
-  const [expenses, setExpense]= useState()
+  const [repayments, setRepayment]= useState()
   useEffect(() => {
     fetch('http://localhost:4557/api/expensesCalcul/44a36f45-010f-4bf7-a7f0-8434108fecd6', {
       method: "GET",
@@ -13,15 +13,24 @@ export default function Repayment(){
         Authorization: 'Bearer ' + token.token
     })
   })
-  .then((data) => data.text())
+  .then((data) => data.json())
   .then((json) => {
-    // if (json.message === 'invalid cred') {
-    //   sessionStorage.removeItem('token')
-    //   navigate('/signin')
-    // }
-    console.log(json)
+    if (json.message === 'invalid cred') {
+      sessionStorage.removeItem('token')
+      navigate('/signin')
+    }
+    setRepayment(json.expenses)
   })
-}, [])
-
-return <h1>yo</h1>;
+  }, [])
+  if (repayments != null) {
+    console.log(repayments)
+    return(
+      repayments.map((repayment)=> 
+        <div>{repayment.this_user} {repayment.owes} {repayment.to}</div>
+      )
+    )
+  }
+  else{
+    return null
+  }
 }

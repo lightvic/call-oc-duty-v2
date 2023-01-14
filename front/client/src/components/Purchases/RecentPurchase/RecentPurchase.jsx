@@ -24,9 +24,6 @@ export default function RecentPurchase() {
     setPurchases(json.unfix)
   })
 }, [])
-  console.log(purchases)
-  const date = new Date("2023-01-13 21:17:44")
-  console.log(date.getDate())
   if (purchases != null){
     const ListMonth = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Sptembre",
                       "Octobre","Novembre","Décembre"]    
