@@ -30,10 +30,5 @@ export default function Toast({
     }
   })
 
-  return (
-    <>
-      {/* <button onClick={notify}>Notify</button>; */}
-      <ToastContainer />
-    </>
-  )
+  return <ToastContainer />
 }

@@ -1,5 +1,4 @@
-import { stringify } from 'querystring'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FlatsharesActionModal, ModalContainer } from '../../components'
 
@@ -28,19 +27,24 @@ export default function Colocs() {
   }, [])
 
   const addNewColoc = () => {
-    console.log('click')
     setOpenModal((openModal) => !openModal)
+  }
+
+  const selectColoc = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // e.currentTarget.id
+    navigate('/dashboard')
   }
 
   return (
     <>
-      {colocs.map((coloc, i) => (
-        <button key={i} id={coloc.uuid}>
-          <p>{coloc.address}</p>
-          <p>{coloc.town}</p>
-          <p>{coloc.post_code}</p>
-        </button>
-      ))}
+      {colocs &&
+        colocs.map((coloc, i) => (
+          <button onClick={selectColoc} key={i} id={coloc.uuid}>
+            <p>{coloc.address}</p>
+            <p>{coloc.town}</p>
+            <p>{coloc.post_code}</p>
+          </button>
+        ))}
       <button onClick={addNewColoc}>Nouvelle coloc</button>
       <div>
         <ModalContainer isOpen={openModal}>

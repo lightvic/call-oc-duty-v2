@@ -8,7 +8,7 @@ import {
   RecentPurchase,
   RedirectButton,
 } from '../../components'
-import jwt_decode from "jwt-decode"
+import jwt_decode from 'jwt-decode'
 import ColocDounghnut from '../../components/ColocDoughnut/ColocDounghnut'
 
 export default function Dashboard() {
@@ -40,16 +40,16 @@ export default function Dashboard() {
           <p>Bon retour, {(currentUser as any).pseudo} !</p>
         </div>
 
-				<div className="dashboard-buttons">
-					<FilterButton filters={filters} />
+        <div className="dashboard-buttons">
+          <FilterButton filters={filters} />
           <PersonelDounghnut />
           <ColocDounghnut />
           <RecentPurchase />
           <ReccurentPurchase />
-					{/* <RedirectButton src={''} name={'Filter button'} type={'primary'} /> */}
-				</div>
-				{/* <PurchasesContainer /> */}
-			</div>
-		</>
-	)
+          {/* <RedirectButton src={''} name={'Filter button'} type={'primary'} /> */}
+        </div>
+        {/* <PurchasesContainer /> */}
+      </div>
+    </>
+  )
 }

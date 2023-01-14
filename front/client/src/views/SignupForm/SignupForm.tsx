@@ -1,19 +1,19 @@
 import React from 'react'
 import { Toast } from '../../components'
 import { InputForm } from '../../components'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export interface formDataInterface {
-  pseudo: string
-  email: string
-  pwd: string
-}
+// export interface formDataInterface {
+//   pseudo: string
+//   email: string
+//   pwd: string
+// }
 
-export interface Ierror {
-  isError: boolean
-  message: string
-}
+// export interface Ierror {
+//   isError: boolean
+//   message: string
+// }
 
 export default function SignupForm() {
   const inputs = [
@@ -54,17 +54,16 @@ export default function SignupForm() {
     e.preventDefault()
 
     const form = document.querySelectorAll('form')[0]
-
     let array = []
     for (let i = 0; i < 3; i++) {
       array.push((form[i] as HTMLInputElement).value)
     }
-
     const data = {
       email: array[0],
       pseudo: array[1],
       pwd: array[2],
     }
+
     fetch('http://localhost:4557/api/signUp', {
       method: 'POST',
       mode: 'cors',
