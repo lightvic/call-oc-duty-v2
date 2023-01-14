@@ -19,7 +19,7 @@ class colocController extends Controller
     #[Route('/api/colocSection', 'colocSection', ['GET'])]
     public function colocSection()
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $cred = str_replace("Bearer ", "", getallheaders()['authorization']);
         $currentUser = $this->checkJwtAndGetUser($cred);
 
         $colocRepository = new ColocRepository(new PDOFactory());
@@ -69,7 +69,7 @@ class colocController extends Controller
     {
         $response = (array) json_decode(file_get_contents('php://input'));
 
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
+        $cred = str_replace("Bearer ", "", getallheaders()['authorization']);
         $currentUser = $this->checkJwtAndGetUser($cred);
 
         $users = $response['users'];

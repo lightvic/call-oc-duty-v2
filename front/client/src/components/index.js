@@ -31,6 +31,9 @@ import RecentPurchase from './Purchases/RecentPurchase/RecentPurchase'
 // Notifications
 import Toast from './Toast/Toast'
 
+// test
+import NewColoc from './test/NewColoc'
+
 export {
   OpenModalButton,
   ButtonAction,
@@ -51,4 +54,7 @@ export {
   RedirectButton,
   ButtonDropdown,
   Toast,
+
+  //test
+  NewColoc,
 }
