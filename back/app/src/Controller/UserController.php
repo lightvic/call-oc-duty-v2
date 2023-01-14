@@ -67,8 +67,7 @@ class UserController extends Controller
     {
         $response = (array) json_decode(file_get_contents('php://input'));
 
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $userRepository = new UserRepository(new PDOFactory());
         $user = $userRepository->getUserByUuid($currentUser);
@@ -126,8 +125,7 @@ class UserController extends Controller
     #[Route('/api/deleteUser', 'delete user', ['POST'])]
     public function deleteUser()
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $userRepository = new UserRepository(new PDOFactory());
         if ($currentUser) {
