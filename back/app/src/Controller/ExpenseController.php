@@ -110,8 +110,34 @@ class ExpenseController extends Controller
 
         arsort($userExpenses);
 
+
+
+        $expenses = array(
+            "jb" => 180,
+            "valentine" => 60,
+            "adrien" => -240
+        );
+        $people = array_keys($expenses);
+        $debts = array();
+        foreach($people as $person) {
+            if ($expenses[$person] < 0) {
+                foreach($people as $person_to) {
+                    if ($expenses[$person_to] > 0) {
+                        $debt = min(abs($expenses[$person]), $expenses[$person_to]);
+                        $debts[] = array($person, $person_to, $debt);
+                        $expenses[$person] += $debt;
+                        $expenses[$person_to] -= $debt;
+                    }
+                }
+            }
+        }
+        $array = [];
+        foreach ($debts as $debt) {
+            $array[] = $debt[0]." doit ".$debt[2]." à ".$debt[1];
+        }
+
         $this->renderJSON([
-            "expenses" => $userExpenses
+            "expenses" => $array
         ]);
         http_response_code(200);
         die();
