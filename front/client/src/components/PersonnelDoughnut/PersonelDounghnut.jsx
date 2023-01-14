@@ -11,8 +11,7 @@ export default function PersonelDounghnut() {
     fetch('http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd6&365', {
       method: "GET",
       headers: new Headers({
-        "Authorization" : "Basic amZnbWFpbC5jb206cGFzc3dvcmQ=",
-        "Content-type":  "application/x-www-form-urlencoded"
+        Authorization: 'Bearer ' + token.token
     })
   })
     .then(data => data.json())

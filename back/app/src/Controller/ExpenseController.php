@@ -98,7 +98,6 @@ class ExpenseController extends Controller
 
         $userRepository = new UserRepository(new PDOFactory());
         $users = $userRepository->getAllUsersByCollocUuid($colocUuid);
-
         $expenseRepository = new ExpenseRepository(new PDOFactory());
 
         $expenses = [];
@@ -110,6 +109,8 @@ class ExpenseController extends Controller
         }
 
         arsort($expenses);
+        var_dump($expenses);
+        die;
 
         $people = array_keys($expenses);
         $debts = array();

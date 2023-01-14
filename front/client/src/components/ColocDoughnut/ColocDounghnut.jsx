@@ -13,7 +13,7 @@ export default function ColocDounghnut() {
     fetch('http://localhost:4557/api/colocStat/42500393-9805-4bca-8b5d-03df0d297927&365', {
       method: "GET",
       headers: new Headers({
-        Authorization: "Basic amZnbWFpbC5jb206cGFzc3dvcmQ="
+        Authorization: 'Bearer ' + token.token
     })
   })
   .then((data) => data.json())
