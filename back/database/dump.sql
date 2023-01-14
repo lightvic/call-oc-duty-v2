@@ -67,15 +67,19 @@ INSERT INTO users_colocs (uuid, user_uuid, coloc_uuid, admin) VALUES
 ('105f7498-82e9-4ac0-932e-987af63a1b49', '4aad1ecd-77cd-48cf-bbe1-b101868f69a8', '42500393-9805-4bca-8b5d-03df0d297927', 1),
 ('96e48b2e-8e5b-40ec-9caa-0fa6c751aeb3', 'fd6519a7-90e1-4a70-9a49-95b28ccfe8ea', '42500393-9805-4bca-8b5d-03df0d297927', 0);
 
-INSERT INTO expenses (uuid, name, value, category, type,  token, user_uuid, coloc_uuid) VALUES
-('a027b779-9a3a-4607-870c-6644edddb4e5', 'Loyer', 400, 'Charges/Loyer', 'Achat', '4b9122d3-bca0-43f5-804e-3a90399f43b5', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('bd74eff9-272d-4d26-b7d9-eef68bfc1d2e', 'Eau', 40, 'Charges/Loyer', 'Achat', '6a279017-7108-4221-83d6-2782fdd8a5fb', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('5ca7e5a0-0fb9-4f61-95e3-9f1453f21c1c', 'Electricité', 120, 'Charges/Loyer', 'Achat', '3da731bc-08ee-4876-8aa2-ed6d13897820', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('945c35f1-5881-4e20-807b-0670af2f0b52', 'Courses', 140, 'Courses', 'Achat', 'b3ae7896-7e64-4bc7-be03-991faf4339a7', '24613cce-f7a4-41f0-bf6d-c318751f2d8d', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('2e67070b-43f7-4205-a6a2-465fd4da337f', 'Café', 600, 'Autres', 'Remboursement', 'd027877f-d1fa-4ff6-81f1-62b464c50f5f', '6acea239-1568-4af7-8cf6-13f405c4cc31', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('0723b25d-1475-41d8-ad4b-40573cc518f9', 'Courses', 100, 'Courses', 'Achat', '454268a0-ce06-49db-a86c-96e644dcaabb', 'fd6519a7-90e1-4a70-9a49-95b28ccfe8ea', '42500393-9805-4bca-8b5d-03df0d297927'),
-('5203f2ca-5e01-41b9-a53c-9f25df1d5fe0', 'Eau', 30, 'Charges/Loyer', 'Remboursement', 'a2189fda-3072-4c6e-87ee-fe282a69b109', '4aad1ecd-77cd-48cf-bbe1-b101868f69a8', '42500393-9805-4bca-8b5d-03df0d297927'),
-('1b04defd-4030-4ba6-8385-f7924219f647', 'Loyer', 300, 'Charges/Loyer', 'Achat', '4e1f8b2d-1e3d-433c-a5b5-e98ab54a2972', '3c85ac51-e769-4efb-bab9-9a5307f55014', '42500393-9805-4bca-8b5d-03df0d297927');
+INSERT INTO expenses (uuid, name, value, category, type, fix, token, user_uuid, coloc_uuid) VALUES
+('a027b779-9a3a-4607-870c-6644edddb4e5', 'Loyer', 400, 'Charges/Loyer', 'Achat', 1, '4b9122d3-bca0-43f5-804e-3a90399f43b5', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('ba72304d-947d-45f6-9a35-ae53dbd1d72c', 'Loyer', -200, 'Charges/Loyer', 'Achat', 1, '4b9122d3-bca0-43f5-804e-3a90399f43b5', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('2c9e9024-6281-4077-ba88-98a575e60293', 'Loyer', -200, 'Charges/Loyer', 'Achat', 1, '4b9122d3-bca0-43f5-804e-3a90399f43b5', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('bd74eff9-272d-4d26-b7d9-eef68bfc1d2e', 'Eau', 40, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('4d6610b3-4b75-4997-bae1-4979aff30e88', 'Eau', -20, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('fd794240-c7f8-49a7-8e72-6724acf9e45a', 'Eau', -20, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('5ca7e5a0-0fb9-4f61-95e3-9f1453f21c1c', 'Cafe', 120, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('994a05f5-c028-470d-abf9-c1c1cb02415f', 'Cafe', -60, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('1a74c98e-ef7c-4033-80b4-dbc9ad701fa7', 'Cafe', -60, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('0723b25d-1475-41d8-ad4b-40573cc518f9', 'Courses', 100, 'Courses', 'Achat', 0, '454268a0-ce06-49db-a86c-96e644dcaabb', 'fd6519a7-90e1-4a70-9a49-95b28ccfe8ea', '42500393-9805-4bca-8b5d-03df0d297927'),
+('5203f2ca-5e01-41b9-a53c-9f25df1d5fe0', 'Eau', 30, 'Charges/Loyer', 'Remboursement', 1, 'a2189fda-3072-4c6e-87ee-fe282a69b109', '4aad1ecd-77cd-48cf-bbe1-b101868f69a8', '42500393-9805-4bca-8b5d-03df0d297927'),
+('1b04defd-4030-4ba6-8385-f7924219f647', 'Loyer', 300, 'Charges/Loyer', 'Achat', 1, '4e1f8b2d-1e3d-433c-a5b5-e98ab54a2972', '3c85ac51-e769-4efb-bab9-9a5307f55014', '42500393-9805-4bca-8b5d-03df0d297927');
 
 UPDATE colocs SET address = IFNULL(CONVERT(CONVERT(CONVERT(address USING latin1)USING binary)USING utf8),address);
 UPDATE colocs SET town = IFNULL(CONVERT(CONVERT(CONVERT(town USING latin1)USING binary)USING utf8),town);

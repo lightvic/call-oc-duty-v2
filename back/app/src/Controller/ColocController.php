@@ -174,21 +174,21 @@ class colocController extends Controller
         $colocRepository = new ColocRepository(new PDOFactory());
         $coloc = $colocRepository->getColocByUuid($colocUuid);
 
-        if ($response['address'] != null) {
+        if (isset($response['address'])) {
             $coloc->setAddress($response['address']);
         }
-        if ($response['name'] != null) {
+        if (isset($response['name'])) {
             $coloc->setName($response['name']);
         }
-        if ($response['post_code'] != null) {
+        if (isset($response['post_code'])) {
             $coloc->setPostCode($response['post_code']);
         }
-        if ($response['town'] != null) {
+        if (isset($response['town'])) {
             $coloc->setTown($response['town']);
         }
 
         $file = null;
-        if ($_FILES['fileToUpload']['name']) {
+        if (isset($_FILES['fileToUpload']['name'])) {
             $fileName = $this->MakeUuid() . '.' . strtolower(pathinfo($_FILES["fileToUpload"]['name'],PATHINFO_EXTENSION));
             $isSaved = $this->saveFile($fileName);
             if ($isSaved[0] === 'error'){

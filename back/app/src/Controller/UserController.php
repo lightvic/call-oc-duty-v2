@@ -73,19 +73,21 @@ class UserController extends Controller
         $userRepository = new UserRepository(new PDOFactory());
         $user = $userRepository->getUserByUuid($currentUser);
 
-        if ($response['email'] != null) {
+        if (isset($response['email'])) {
             $email = $response['email'];
             $existMail = $userRepository->getUserByMail($email);
-            if ($existMail) {
+            if ($existMail && $existMail->getUuid() !== $currentUser) {
                 $this->renderJSON([
-                    'error' => 'cet email est déjà pris'
+                    'error' => 'cet email est déjà pris',
+                    'existMail' => $existMail->getUuid(),
+                    'current' => $currentUser
                 ]);
                 die();
             }
             $user->setEmail($email);
         }
 
-        if ($response['oldPassword'] != null && $response['newPassword'] != null) {
+        if (isset($response['oldPassword']) && isset($response['newPassword'])) {
             $oldPassword = $response['oldPassword'];
             $newPassword = $response['newPassword'];
             if (!$user->verifyPassword($oldPassword)) {
@@ -97,12 +99,12 @@ class UserController extends Controller
             $user->setPwd($newPassword, true);
         }
 
-        if ($response['pseudo'] != null) {
+        if (isset($response['pseudo'])) {
             $user->setPseudo($response['pseudo']);
         }
 
         $file = null;
-        if ($_FILES['fileToUpload']['name']) {
+        if (isset($_FILES['fileToUpload']['name'])) {
             $fileName = $this->MakeUuid() . '.' . strtolower(pathinfo($_FILES["fileToUpload"]['name'],PATHINFO_EXTENSION));
             $isSaved = $this->saveFile($fileName);
             if ($isSaved[0] === 'error'){
