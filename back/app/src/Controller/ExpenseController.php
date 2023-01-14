@@ -9,6 +9,7 @@ use App\Model\Repository\ExpenseRepository;
 use App\Model\Repository\UserRepository;
 use App\Route\Route;
 use App\Services\JWTHelper;
+use http\Env\Response;
 
 class ExpenseController extends Controller
 {
@@ -64,31 +65,44 @@ class ExpenseController extends Controller
         $currentUser = $this->checkJwtAndGetUser();
 
         $otherParticipant = $response['other_participant'];
+        $otherParticipant[] = $currentUser;
         $toDivid = count($otherParticipant);
+        $value = $response['global_value'];
 
-        echo "truc";
-        die;
-        /*$expenseArgs = [
-            'uuid' => $this->MakeUuid(),
-            'name' => $response['name'],
-            'value' => $response['value'],
-            'category' => $response['category'],
-            'type' => $response['type'],
-            'fix' => $response['fix'],
-            'token' => $this->MakeUuid(),
-            'user_uuid' => $response['user_uuid'],
-            'coloc_uuid' => $response['coloc_uuid']
-        ];*/
+        $eachDue = -$value / $toDivid;
+        $token = $this->MakeUuid();
 
-        $expense = new Expense($expenseArgs);
-        $expenseRepository = new ExpenseRepository(new PDOFactory());
+        foreach ($otherParticipant as $participant) {
+            $this->setNewExpenseArgs($eachDue, $participant, $response, $token);
+        }
 
-        $expenseRepository->insertExpense($expense);
+        $this->setNewExpenseArgs($value, $currentUser, $response, $token);
 
         $this->renderJSON([
             'success' => 'Enregistré avec succés'
         ]);
         die();
+    }
+
+    public function setNewExpenseArgs(int $eachDue, string $userUuid, array $response, string $token)
+    {
+        $expenseRepository = new ExpenseRepository(new PDOFactory());
+
+        $expenseArgs = [
+            'uuid' => $this->MakeUuid(),
+            'name' => $response['name'],
+            'value' => $eachDue,
+            'category' => $response['category'],
+            'type' => $response['type'],
+            'fix' => $response['fix'],
+            'token' => $token,
+            'user_uuid' => $userUuid,
+            'coloc_uuid' => $response['coloc_uuid']
+        ];
+
+        $expense = new Expense($expenseArgs);
+
+        $expenseRepository->insertExpense($expense);
     }
 
     #[Route('/api/expensesCalcul/{colocUuid}', 'expense calcul', ['GET'])]
@@ -127,12 +141,14 @@ class ExpenseController extends Controller
         }
         $due = [];
         foreach ($debts as $debt) {
+            if ($debt[2] === 0) {
+                continue;
+            }
             $due[] = [
                 "this_user" => $debt[0],
                 "owes" => $debt[2],
                 "to" => $debt[1]
             ];
-            /*$due[] = $debt[0]." doit ".$debt[2]." à ".$debt[1];*/
         }
 
         $this->renderJSON([
