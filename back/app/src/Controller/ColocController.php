@@ -94,7 +94,6 @@ class colocController extends Controller
             $admin = 0;
             if ($newUser->getUuid() === $currentUser) {
                 $admin = 1;
-
             }
 
             $userColocArgs = [
