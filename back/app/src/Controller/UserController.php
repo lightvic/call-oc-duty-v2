@@ -15,6 +15,12 @@ class UserController extends Controller
     {
         $response = (array) json_decode(file_get_contents('php://input'));
 
+        if (!isset($response['email']) || !isset($response['pwd'])) {
+            $this->renderJSON([
+                "error" => 'Un des champs est manquant'
+            ]);
+            die();
+        }
         $mail = $response['email'];
         $password = $response['pwd'];
 
@@ -39,6 +45,13 @@ class UserController extends Controller
     public function signUp()
     {
         $response = (array) json_decode(file_get_contents('php://input'));
+
+        if (!isset($response['email']) || !isset($response['pwd'])) {
+            $this->renderJSON([
+                "error" => 'Un des champs est manquant'
+            ]);
+            die();
+        }
 
         $mail = $response['email'];
 

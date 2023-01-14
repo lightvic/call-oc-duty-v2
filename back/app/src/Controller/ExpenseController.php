@@ -13,14 +13,13 @@ use http\Env\Response;
 
 class ExpenseController extends Controller
 {
-    #[Route('/api/unFixExpense/{colocUuid}&{limitDate}', 'unfix expense', ['GET'])]
-    public function unfixExpense($colocUuid, $limitDate)
+    #[Route('/api/unFixExpense/{colocUuid}', 'unfix expense', ['GET'])]
+    public function unfixExpense($colocUuid)
     {
         $currentUser = $this->checkJwtAndGetUser();
 
-        $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
-        $unfixExpense = $expenseRepository->getAllUnfixExpenseByColocUuid($colocUuid, $date);
+        $unfixExpense = $expenseRepository->getAllUnfixExpenseByColocUuid($colocUuid);
 
         if($unfixExpense != null) {
             $this->renderJSON([
@@ -35,14 +34,13 @@ class ExpenseController extends Controller
         die();
     }
 
-    #[Route('/api/fixExpense/{colocUuid}&{limitDate}', 'fix expense', ['GET'])]
-    public function fixExpense($colocUuid, $limitDate)
+    #[Route('/api/fixExpense/{colocUuid}', 'fix expense', ['GET'])]
+    public function fixExpense($colocUuid)
     {
         $currentUser = $this->checkJwtAndGetUser();
 
-        $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
-        $unfixExpense = $expenseRepository->getAllfixExpenseByColocUuid($colocUuid, $date);
+        $unfixExpense = $expenseRepository->getAllfixExpenseByColocUuid($colocUuid);
 
         if($unfixExpense != null) {
             $this->renderJSON([
@@ -68,12 +66,13 @@ class ExpenseController extends Controller
         $otherParticipant[] = $currentUser;
         $toDivid = count($otherParticipant);
         $value = $response['global_value'];
+        $eachDue = - floor(100* $value / $toDivid) / 100;
 
-        $eachDue = -$value / $toDivid;
+        $diff = $value - $eachDue * $toDivid;
         $token = $this->MakeUuid();
 
         foreach ($otherParticipant as $participant) {
-            $this->setNewExpenseArgs($eachDue, $participant, $response, $token);
+            $this->setNewExpenseArgs($eachDue, $participant, $response, $token, $diff, $currentUser);
         }
 
         $this->setNewExpenseArgs($value, $currentUser, $response, $token);
@@ -84,9 +83,13 @@ class ExpenseController extends Controller
         die();
     }
 
-    public function setNewExpenseArgs(int $eachDue, string $userUuid, array $response, string $token)
+    public function setNewExpenseArgs(int|float $eachDue, string $userUuid, array $response, string $token, int|float $diff = 0, ?string $currentUser = null)
     {
         $expenseRepository = new ExpenseRepository(new PDOFactory());
+
+        if ($currentUser && $userUuid === $currentUser) {
+            $eachDue += $diff;
+        }
 
         $expenseArgs = [
             'uuid' => $this->MakeUuid(),

@@ -37,15 +37,14 @@ class colocController extends Controller
         die();
     }
 
-    #[Route('/api/colocStat/{colocUuid}&{limitDate}', 'colocStat', ['GET'])]
-    public function colocStat($colocUuid, $limitDate)
+    #[Route('/api/colocStat/{colocUuid}', 'colocStat', ['GET'])]
+    public function colocStat($colocUuid)
     {
         $currentUser = $this->checkJwtAndGetUser();
 
-        $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
-        $userExpense = $expenseRepository->getAllExpenseByColocAndUserAndDateLimit($colocUuid, $currentUser, $date);
-        $colocExpense = $expenseRepository->getAllExpenseByColocUuidAndDateLimit($colocUuid, $date);
+        $userExpense = $expenseRepository->getSumAllExpenseByColocAndUser($colocUuid, $currentUser);
+        $colocExpense = $expenseRepository->getAllExpenseByColocUuid($colocUuid);
 
         if($userExpense && $colocExpense) {
             $this->renderJSON([

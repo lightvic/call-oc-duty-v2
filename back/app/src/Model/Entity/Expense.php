@@ -7,7 +7,7 @@ use DateTime;
 class Expense extends BaseEntity
 {
     private ?string $name = null;
-    private ?int $value = null;
+    private null|int|float $value = null;
     private ?string $type = null;
     private ?DateTime $date = null;
     private ?string $fix = null;
@@ -70,18 +70,18 @@ class Expense extends BaseEntity
     }
 
     /**
-     * @return int|null
+     * @return float|int|null
      */
-    public function getValue(): ?int
+    public function getValue(): float|int|null
     {
         return $this->value;
     }
 
     /**
-     * @param int|null $value
+     * @param float|int|null $value
      * @return Expense
      */
-    public function setValue(?int $value): Expense
+    public function setValue(null|int|float $value): Expense
     {
         $this->value = $value;
         return $this;

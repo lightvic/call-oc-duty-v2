@@ -11,7 +11,7 @@ class ExpenseRepository extends Repository
      * @param string $limitDate
      * @return array|null
      */
-    public function getAllUnfixExpenseByColocUuid(string $colocUuid, string $limitDate): ?array
+    public function getAllUnfixExpenseByColocUuid(string $colocUuid): ?array
     {
         $expense =
             'SELECT u.pseudo, u.picture, e.name, e.value, e.type, e.category, e.date, e.fix, e.token
@@ -19,14 +19,12 @@ class ExpenseRepository extends Repository
             INNER JOIN users u ON e.user_uuid = u.uuid
             WHERE e.`coloc_uuid` = :colocUuid
             AND e.`fix` = 0
-            AND date BETWEEN :limit AND NOW()
             AND e.`value` > 0
             AND type = "Achat"
             ORDER BY e.`date` DESC';
 
         $query = $this->pdo->prepare($expense);
         $query->bindValue(":colocUuid", $colocUuid);
-        $query->bindValue(":limit", $limitDate);
         $query->execute();
         $expenses = [];
         while ($result = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -43,7 +41,7 @@ class ExpenseRepository extends Repository
      * @param string $limitDate
      * @return array|null
      */
-    public function getAllfixExpenseByColocUuid(string $colocUuid, string $limitDate): ?array
+    public function getAllfixExpenseByColocUuid(string $colocUuid): ?array
     {
         $expense =
             'SELECT u.pseudo, u.picture, e.name, e.value, e.type, e.category, e.date, e.fix, e.token
@@ -51,14 +49,12 @@ class ExpenseRepository extends Repository
             INNER JOIN users u ON e.user_uuid = u.uuid
             WHERE e.`coloc_uuid` = :colocUuid
             AND e.`fix` = 1
-            AND date BETWEEN :limit AND NOW()
             AND e.`value` > 0
             AND type = "Achat"
             ORDER BY e.`date` DESC';
 
         $query = $this->pdo->prepare($expense);
         $query->bindValue(":colocUuid", $colocUuid);
-        $query->bindValue(":limit", $limitDate);
         $query->execute();
         $expenses = [];
         while ($result = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -75,19 +71,17 @@ class ExpenseRepository extends Repository
      * @param string $limitDate
      * @return array|null
      */
-    public function getAllExpenseByColocUuidAndDateLimit(string $colocUuid, string $limitDate): ?array
+    public function getAllExpenseByColocUuid(string $colocUuid): ?array
     {
         $expense =
             'SELECT SUM(value) AS value, category
             FROM `expenses`
             WHERE `coloc_uuid` = :colocUuid
-            AND date BETWEEN :limit AND NOW()
             AND `value` > 0
             GROUP BY `category`';
 
         $query = $this->pdo->prepare($expense);
         $query->bindValue(":colocUuid", $colocUuid);
-        $query->bindValue(":limit", $limitDate);
         $query->execute();
         $expenses = [];
         while ($result = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -106,7 +100,7 @@ class ExpenseRepository extends Repository
      * @param string $limitDate
      * @return array|null
      */
-    public function getAllExpenseByColocAndUserAndDateLimit(string $colocUuid, string $userUuid, string $limitDate): ?array
+    public function getSumAllExpenseByColocAndUser(string $colocUuid, string $userUuid): ?array
     {
         $expense =
             'SELECT SUM(value) AS value, category
