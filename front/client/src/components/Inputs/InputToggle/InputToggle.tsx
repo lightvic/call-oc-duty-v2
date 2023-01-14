@@ -1,11 +1,11 @@
 import React from 'react'
 
 export default function InputToggle({
-		onChange,
+		type,
 		legend,
 		choices,
 	}: {
-		onChange: any
+		type: string
 		legend: string
 		choices: Array<any>
 	}) {
@@ -14,36 +14,15 @@ export default function InputToggle({
 				<fieldset>
 					<legend>{legend}</legend>
 					<div>
-					{choices.map((choice, i) => (
-						<>
-							{/* je dois changer id et htmlFor en string */}
-							<input key={i} type="checkbox" id={i} name={choice.name} value={choice.value} />
-							<label htmlFor={i}>{choice.content}</label>
-						</>
-					))}
+						{choices.map((choice, i) => (
+							<>
+								{/* je dois changer id et htmlFor en string */}
+								<input key={i} type={type} id={String(i)} name={choice.name} value={choice.value} />
+								<label htmlFor={String(i)}>{choice.content}</label>
+							</>
+						))}
 					</div>
 				</fieldset>
-
-
-
-
-
-
-
-
-
-
-			
-				<label className="label-form" htmlFor={name}>
-					{label}
-				</label>
-				<input
-					className="input-form"
-					type="checkbox"
-					name={name}
-					onChange={onChange}
-					id={name}
-				/>
 			</>
 		)
 	}

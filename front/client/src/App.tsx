@@ -38,7 +38,7 @@ function App() {
             </NeedAuth>
           }
         />
-        {/* <Route
+        <Route
           path={'/dashboard'}
           element={
             <NeedAuth>
@@ -90,7 +90,7 @@ function App() {
               <InProgress />
             </NeedAuth>
           }
-        /> */}
+        />
       </Routes>
     </div>
   )

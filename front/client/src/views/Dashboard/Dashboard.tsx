@@ -5,7 +5,6 @@ import {
   RedirectButton,
 } from '../../components'
 import jwt_decode from "jwt-decode"
-import NewExpenseForm from '../NewExpenseForm/NewExpenseForm'
 
 export default function Dashboard() {
   const filters = [
@@ -41,9 +40,6 @@ export default function Dashboard() {
 					{/* <RedirectButton src={''} name={'Filter button'} type={'primary'} /> */}
 				</div>
 				{/* <PurchasesContainer /> */}
-				<br/>
-				{/* Test val */}
-				<NewExpenseForm/>
 			</div>
 		</>
 	)
