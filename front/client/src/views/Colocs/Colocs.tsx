@@ -24,7 +24,6 @@ export default function Colocs() {
         }
         const colocs = json.colocs
         setColocs(colocs)
-        console.log(colocs)
       })
   }, [])
 

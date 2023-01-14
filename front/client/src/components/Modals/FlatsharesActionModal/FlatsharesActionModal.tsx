@@ -1,16 +1,15 @@
 import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import InputForm from '../../Inputs/InputForm/InputForm'
+import jwt_decode from 'jwt-decode'
 
-export interface formDataInterface extends Record<string, string> {
+// export interface formDataInterface extends Record<string, string> {
+export interface formDataInterface {
   name: string
   address: string
   town: string
   post_code: string
-  'users.email1': string
-  'users.email2': string
-  'users.email3': string
-  'users.email4': string
+  users: string[]
 }
 
 // post_code doit etre string et pas un int
@@ -86,41 +85,44 @@ export default function FlatsharesActionModal() {
       }
     }
 
+    const currentUser = jwt_decode(sessionStorage.token)
+
     const data: formDataInterface = {
       name: info[0],
       address: info[1],
       town: info[2],
       post_code: info[3],
-      'users.email1': email[0],
-      'users.email2': email[1],
-      'users.email3': email[2],
-      'users.email4': email[3],
+      users: [
+        (currentUser as any).email,
+        email[0],
+        email[1],
+        email[2],
+        email[3],
+      ],
     }
-    console.log(data)
 
     fetch('http://localhost:4557/api/newColoc', {
       method: 'POST',
       mode: 'cors',
-      // body: new URLSearchParams(data),
-      body: new URLSearchParams(data),
-
+      body: JSON.stringify(data),
       credentials: 'include',
       headers: new Headers({
         Authorization: 'Bearer ' + token.token,
-        'Content-type': 'application/x-www-form-urlencoded',
+        'Content-type': 'application/json',
       }),
     })
       .then((data) => data.json())
       .then((json) => {
-        console.log(json)
-        // if (json.token) {
-        //   sessionStorage.setItem('token', JSON.stringify(json))
-        navigate('/dashboard')
-        // }
+        if (json.message) {
+          if (json.message === 'invalid cred') {
+            sessionStorage.removeItem('token')
+            navigate('/signin')
+          }
+        }
+        const coloc_uuid = json.coloc.uuid
+        navigate(`/dashboard/${coloc_uuid}`)
       })
   }
-
-  const [addFlashmate, setAddFlashmate] = useState([])
 
   return (
     <>

@@ -3,16 +3,6 @@ import { InputForm, Toast } from '../../components'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export interface formDataInterface {
-  email: string
-  pwd: string
-}
-
-export interface Ierror {
-  isError: boolean
-  message: string
-}
-
 export default function SigninForm() {
   const inputs = [
     {
@@ -29,11 +19,6 @@ export default function SigninForm() {
     },
   ]
 
-  // const [formData, setFormData] = useState<formDataInterface>({
-  // 	email: '',
-  // 	pwd: '',
-  // })
-
   const [showToast, setShowToast] = useState(false)
   const [typeToast, setTypeToast] = useState('')
   const [messageToast, setMessageToast] = useState('')
@@ -41,23 +26,20 @@ export default function SigninForm() {
   const navigate = useNavigate()
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    const test = document.querySelectorAll('form')[0]
+    setShowToast(false)
+    e.preventDefault()
+
+    const form = document.querySelectorAll('form')[0]
 
     let array = []
     for (let i = 0; i < 2; i++) {
-      array.push((test[i] as HTMLInputElement).value)
+      array.push((form[i] as HTMLInputElement).value)
     }
 
     const data = {
       email: array[0],
       pwd: array[1],
     }
-
-    // setFormData(filsdepute)
-
-    console.log(array)
-
-    e.preventDefault()
 
     fetch('http://localhost:4557/api/login', {
       method: 'POST',
@@ -73,7 +55,7 @@ export default function SigninForm() {
       .then((json) => {
         if (json.token) {
           sessionStorage.setItem('token', JSON.stringify(json))
-          navigate('/dashboard')
+          navigate('/select-coloc')
         }
         setShowToast((showToast) => !showToast)
         setTypeToast('error')

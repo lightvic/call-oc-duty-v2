@@ -50,7 +50,9 @@ export default function SignupForm() {
   const navigate = useNavigate()
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    setShowToast(false)
     e.preventDefault()
+
     const form = document.querySelectorAll('form')[0]
 
     let array = []

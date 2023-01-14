@@ -24,10 +24,6 @@ function App() {
     }
   }, [])
 
-  const deco = () => {
-    sessionStorage.removeItem('token')
-  }
-
   return (
     <div className="app">
       <Routes>
