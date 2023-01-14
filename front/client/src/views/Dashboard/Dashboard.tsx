@@ -1,9 +1,4 @@
-import {
-  FilterButton,
-  Menu,
-  PurchasesContainer,
-  RedirectButton,
-} from '../../components'
+import { FilterButton, Menu } from '../../components'
 import jwt_decode from 'jwt-decode'
 
 export default function Dashboard() {
@@ -37,9 +32,7 @@ export default function Dashboard() {
 
         <div className="dashboard-buttons">
           <FilterButton filters={filters} />
-          {/* <RedirectButton src={''} name={'Filter button'} type={'primary'} /> */}
         </div>
-        {/* <PurchasesContainer /> */}
       </div>
     </>
   )

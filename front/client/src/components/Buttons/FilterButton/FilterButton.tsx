@@ -5,12 +5,12 @@ export default function FilterButton({
 }: {
   filters: {
     value: string
-	timeLimit: number
+    timeLimit: number
   }[]
 }) {
   const [selectedFilter, setSelectedFilter] = useState('12 mois')
   const getFilter = (e: React.MouseEvent<HTMLInputElement>) => {
-	setSelectedFilter(e.currentTarget.innerHTML)
+    setSelectedFilter(e.currentTarget.innerHTML)
   }
 
   return (
@@ -18,7 +18,7 @@ export default function FilterButton({
       {filters.map((filter, i) => (
         <div
           key={i}
-		  data-time-limit={filter.timeLimit}
+          data-time-limit={filter.timeLimit}
           className="filter"
           style={
             filter.value === selectedFilter
