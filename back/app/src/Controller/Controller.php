@@ -61,8 +61,14 @@
             );
         }
 
-        public function checkJwtAndGetUser($cred)
+        public function checkJwtAndGetUser()
         {
+            if (isset(getallheaders()['authorization'])) {
+                $auth = (getallheaders()['authorization']);
+            } elseif (isset(getallheaders()['Authorization'])) {
+                $auth = (getallheaders()['Authorization']);
+            }
+            $cred = str_replace("Bearer ", "", $auth);
             $token = JWTHelper::decodeJWT($cred);
             if (!$token) {
                 $this->renderJSON([

@@ -1,13 +1,4 @@
 import React from 'react'
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
 
 // export interface formDataInterface {
 //   pseudo: string

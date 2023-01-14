@@ -55,54 +55,45 @@ export default function SettingsForm() {
     pseudo: '',
     email: '',
   })
-  const handleChange = (e: ChangeEvent) => {
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        // @ts-ignore
-        [e.target.name]: e.target.value,
-      }
-    })
-  }
 
   return (
     <>
       <form>
         <InputForm
-            label={emailInput.label}
-            type={emailInput.type}
-            name={emailInput.name}
-            placeholder={emailInput.placeholder}
+          label={emailInput.label}
+          type={emailInput.type}
+          name={emailInput.name}
+          placeholder={emailInput.placeholder}
         />
         <button type="submit">Valider</button>
       </form>
       <form>
         <InputForm
-            label={pseudoInput.label}
-            type={pseudoInput.type}
-            name={pseudoInput.name}
-            placeholder={pseudoInput.placeholder}
+          label={pseudoInput.label}
+          type={pseudoInput.type}
+          name={pseudoInput.name}
+          placeholder={pseudoInput.placeholder}
         />
         <button type="submit">Valider</button>
       </form>
       <form>
         {pwdInputs.map((pwdInput, i) => (
           <InputForm
-              key={i}
-              label={pwdInput.label}
-              type={pwdInput.type}
-              name={pwdInput.name}
-              placeholder={pwdInput.placeholder}
+            key={i}
+            label={pwdInput.label}
+            type={pwdInput.type}
+            name={pwdInput.name}
+            placeholder={pwdInput.placeholder}
           />
         ))}
         <button type="submit">Valider</button>
       </form>
       <form>
         <InputForm
-            label={profilePicInput.label}
-            type={profilePicInput.type}
-            name={profilePicInput.name}
-            placeholder={profilePicInput.placeholder}
+          label={profilePicInput.label}
+          type={profilePicInput.type}
+          name={profilePicInput.name}
+          placeholder={profilePicInput.placeholder}
         />
         <button type="submit">Valider</button>
       </form>

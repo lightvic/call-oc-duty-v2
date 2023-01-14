@@ -19,8 +19,7 @@ class colocController extends Controller
     #[Route('/api/colocSection', 'colocSection', ['GET'])]
     public function colocSection()
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $colocRepository = new ColocRepository(new PDOFactory());
         $colocs = $colocRepository->getAllColocByUserId($currentUser);
@@ -41,8 +40,7 @@ class colocController extends Controller
     #[Route('/api/colocStat/{colocUuid}&{limitDate}', 'colocStat', ['GET'])]
     public function colocStat($colocUuid, $limitDate)
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
@@ -69,8 +67,8 @@ class colocController extends Controller
     {
         $response = (array) json_decode(file_get_contents('php://input'));
 
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+
+        $currentUser = $this->checkJwtAndGetUser();
 
         $users = $response['users'];
         $colocArgs = [
@@ -94,7 +92,6 @@ class colocController extends Controller
             $admin = 0;
             if ($newUser->getUuid() === $currentUser) {
                 $admin = 1;
-
             }
 
             $userColocArgs = [
@@ -129,8 +126,7 @@ class colocController extends Controller
     #[Route('/api/modifyInfo/{colocUuid}', 'modify info', ['GET'])]
     public function modifyInfo($colocUuid)
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $userRepository = new UserRepository(new PDOFactory());
         $users = $userRepository->getAllUsersByCollocUuid($colocUuid);
@@ -157,8 +153,7 @@ class colocController extends Controller
     {
         $response = (array) json_decode(file_get_contents('php://input'));
 
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $userColocRepository = new UserColocRepository(new PDOFactory());
         $admin = $userColocRepository->getAdminByColocUuid($colocUuid);
@@ -211,8 +206,7 @@ class colocController extends Controller
     #[Route('/api/deleteUserFromColoc/{userUuid}&{colocUuid}', 'delete_user from coloc', ['POST'])]
     public function deleteUserFromColoc($userUuid, $colocUuid)
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $userColocRepository = new UserColocRepository(new PDOFactory());
         $admin = $userColocRepository->getAdminByColocUuid($colocUuid);
@@ -244,8 +238,7 @@ class colocController extends Controller
     #[Route('/api/deleteColoc/{colocUuid}', 'delete coloc', ['POST'])]
     public function deleteColoc($colocUuid)
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $userColocRepository = new UserColocRepository(new PDOFactory());
         $admin = $userColocRepository->getAdminByColocUuid($colocUuid);
@@ -272,8 +265,7 @@ class colocController extends Controller
     {
         $response = (array) json_decode(file_get_contents('php://input'));
 
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $userColocRepository = new UserColocRepository(new PDOFactory());
         $admin = $userColocRepository->getAdminByColocUuid($colocUuid);

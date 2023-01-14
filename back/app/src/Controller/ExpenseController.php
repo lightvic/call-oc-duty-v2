@@ -15,8 +15,7 @@ class ExpenseController extends Controller
     #[Route('/api/unFixExpense/{colocUuid}&{limitDate}', 'unfix expense', ['GET'])]
     public function unfixExpense($colocUuid, $limitDate)
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
@@ -38,8 +37,7 @@ class ExpenseController extends Controller
     #[Route('/api/fixExpense/{colocUuid}&{limitDate}', 'fix expense', ['GET'])]
     public function fixExpense($colocUuid, $limitDate)
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $date = (new \DateTime("- $limitDate days"))->format('Y-m-d H:i:s');
         $expenseRepository = new ExpenseRepository(new PDOFactory());
@@ -63,10 +61,14 @@ class ExpenseController extends Controller
     {
         $response = (array) json_decode(file_get_contents('php://input'));
 
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
-        $expenseArgs = [
+        $otherParticipant = $response['other_participant'];
+        $toDivid = count($otherParticipant);
+
+        echo "truc";
+        die;
+        /*$expenseArgs = [
             'uuid' => $this->MakeUuid(),
             'name' => $response['name'],
             'value' => $response['value'],
@@ -76,7 +78,7 @@ class ExpenseController extends Controller
             'token' => $this->MakeUuid(),
             'user_uuid' => $response['user_uuid'],
             'coloc_uuid' => $response['coloc_uuid']
-        ];
+        ];*/
 
         $expense = new Expense($expenseArgs);
         $expenseRepository = new ExpenseRepository(new PDOFactory());
@@ -92,31 +94,23 @@ class ExpenseController extends Controller
     #[Route('/api/expensesCalcul/{colocUuid}', 'expense calcul', ['GET'])]
     public function expenseCalcul($colocUuid)
     {
-        $cred = str_replace("Bearer ", "", getallheaders()['Authorization']);
-        $currentUser = $this->checkJwtAndGetUser($cred);
+        $currentUser = $this->checkJwtAndGetUser();
 
         $userRepository = new UserRepository(new PDOFactory());
         $users = $userRepository->getAllUsersByCollocUuid($colocUuid);
 
         $expenseRepository = new ExpenseRepository(new PDOFactory());
 
-        $userExpenses = [];
+        $expenses = [];
         foreach ($users as $user) {
             $result = $expenseRepository->getAllExpenseByColocAndUser($colocUuid, $user['uuid']);
             if (count($result) > 0) {
-                $userExpenses[$result[0]['pseudo']] = $result[0]['value'];
+                $expenses[$result[0]['pseudo']] = $result[0]['value'];
             }
         }
 
-        arsort($userExpenses);
+        arsort($expenses);
 
-
-
-        $expenses = array(
-            "jb" => 180,
-            "valentine" => 60,
-            "adrien" => -240
-        );
         $people = array_keys($expenses);
         $debts = array();
         foreach($people as $person) {
@@ -131,13 +125,18 @@ class ExpenseController extends Controller
                 }
             }
         }
-        $array = [];
+        $due = [];
         foreach ($debts as $debt) {
-            $array[] = $debt[0]." doit ".$debt[2]." à ".$debt[1];
+            $due[] = [
+                "this_user" => $debt[0],
+                "owes" => $debt[2],
+                "to" => $debt[1]
+            ];
+            /*$due[] = $debt[0]." doit ".$debt[2]." à ".$debt[1];*/
         }
 
         $this->renderJSON([
-            "expenses" => $array
+            "expenses" => $due
         ]);
         http_response_code(200);
         die();

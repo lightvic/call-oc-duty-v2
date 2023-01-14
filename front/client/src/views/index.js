@@ -4,5 +4,14 @@ import SettingsForm from './SettingsForm/SettingsForm'
 import Dashboard from './Dashboard/Dashboard'
 import InProgress from './InProgress/InProgress'
 import Home from './Home/Home'
+import Colocs from './Colocs/Colocs'
 
-export { SigninForm, SignupForm, SettingsForm, Dashboard, InProgress, Home }
+export {
+  SigninForm,
+  SignupForm,
+  SettingsForm,
+  Dashboard,
+  InProgress,
+  Home,
+  Colocs,
+}

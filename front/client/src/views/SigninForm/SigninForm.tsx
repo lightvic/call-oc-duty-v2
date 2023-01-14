@@ -3,99 +3,81 @@ import { InputForm, Toast } from '../../components'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export interface formDataInterface {
-	email: string
-	pwd: string
-}
-
-export interface Ierror {
-	isError: boolean
-	message: string
-}
-
 export default function SigninForm() {
-	const inputs = [
-		{
-			label: 'Email',
-			type: 'email',
-			name: 'email',
-			placeholder: 'ex : jean.martin@bidule.com',
-		},
-		{
-			label: 'Mot de passe',
-			type: 'password',
-			name: 'pwd',
-			placeholder: 'Entrez votre mot de passe.',
-		},
-	]
+  const inputs = [
+    {
+      label: 'Email',
+      type: 'email',
+      name: 'email',
+      placeholder: 'ex : jean.martin@bidule.com',
+    },
+    {
+      label: 'Mot de passe',
+      type: 'password',
+      name: 'pwd',
+      placeholder: 'Entrez votre mot de passe.',
+    },
+  ]
 
-	// const [formData, setFormData] = useState<formDataInterface>({
-	// 	email: '',
-	// 	pwd: '',
-	// })
+  const [showToast, setShowToast] = useState(false)
+  const [typeToast, setTypeToast] = useState('')
+  const [messageToast, setMessageToast] = useState('')
 
-	const [showToast, setShowToast] = useState(false)
-	const [typeToast, setTypeToast] = useState('')
-	const [messageToast, setMessageToast] = useState('')
+  const navigate = useNavigate()
 
-	const navigate = useNavigate()
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    setShowToast(false)
+    e.preventDefault()
 
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-		const test = document.querySelectorAll('form')[0]
+    const form = document.querySelectorAll('form')[0]
 
-		let array = []
-		for (let i = 0; i < 2; i++) {
-			array.push((test[i] as HTMLInputElement).value)
-		}
+    let array = []
+    for (let i = 0; i < 2; i++) {
+      array.push((form[i] as HTMLInputElement).value)
+    }
 
-		const data = {
-			email: array[0],
-			pwd: array[1],
-		}
+    const data = {
+      email: array[0],
+      pwd: array[1],
+    }
 
-		// setFormData(filsdepute)
+    fetch('http://localhost:4557/api/login', {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(data),
+      credentials: 'include',
+      headers: new Headers({
+        Authorization: 'Basic amZnbWFpbC5jb206cGFzc3dvcmQ=',
+        'Content-type': 'application/json',
+      }),
+    })
+      .then((data) => data.json())
+      .then((json) => {
+        if (json.token) {
+          sessionStorage.setItem('token', JSON.stringify(json))
+          navigate('/select-coloc')
+        }
+        setShowToast((showToast) => !showToast)
+        setTypeToast('error')
+        setMessageToast({ isError: true, message: json.error }.message)
+      })
+  }
 
-		console.log(array)
-
-		e.preventDefault()
-
-		fetch('http://localhost:4557/api/login', {
-			method: 'POST',
-			mode: 'cors',
-			body: JSON.stringify(data),
-			credentials: 'include',
-			headers: new Headers({
-				Authorization: 'Basic amZnbWFpbC5jb206cGFzc3dvcmQ=',
-				'Content-type': 'application/json',
-			}),
-		})
-		.then((data) => data.json())
-		.then((json) => {
-			if (json.token) {
-				sessionStorage.setItem('token', JSON.stringify(json))
-				navigate('/dashboard')
-			}
-			setShowToast((showToast) => !showToast)
-			setTypeToast('error')
-			setMessageToast({ isError: true, message: json.error }.message)
-		})
-	}
-
-	return (
-		<>
-			<form onSubmit={handleSubmit}>
-				{inputs.map((input, i) => (
-					<InputForm
-						key={i}
-						label={input.label}
-						type={input.type}
-						name={input.name}
-						placeholder={input.placeholder}
-					/>
-				))}
-				<button type="submit">Se connecter</button>
-			</form>
-			<Toast show={showToast} type={typeToast} message={messageToast} />
-		</>
-	)
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        {inputs.map((input, i) => (
+          <InputForm
+            key={i}
+            label={input.label}
+            type={input.type}
+            name={input.name}
+            placeholder={input.placeholder}
+          />
+        ))}
+        <button type="submit">Se connecter</button>
+      </form>
+      <Toast show={showToast} type={typeToast} message={messageToast} />
+    </>
+  )
 }
