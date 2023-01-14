@@ -1,11 +1,13 @@
 import { $CombinedState } from '@reduxjs/toolkit';
 import React, { PureComponent, useEffect, useState } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import jwt_decode from 'jwt-decode';
 
 // #[Route('/api/colocStat/{colocUuid}&{limitDate}', 'colocStat', ['GET'])] => route à envoyer
 
 
 export default function PersonelDounghnut() {
+  const token = jwt_decode(sessionStorage.token)
   const [expenses, setExpense]= useState()
   useEffect(() => {
     fetch('http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd6&365', {

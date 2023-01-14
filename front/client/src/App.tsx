@@ -10,6 +10,7 @@ import {
 import './styles/global.css'
 import { Route, Routes } from 'react-router-dom'
 import NeedAuth from './routes/NeedAuth'
+import PersonelDounghnut from './components/PersonnelDoughnut/PersonelDounghnut'
 
 interface authInterface {
   value: boolean

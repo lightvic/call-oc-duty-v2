@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { IconVector } from "../../../assets"
 import {useNavigate} from "react-router-dom";
+import jwt_decode from 'jwt-decode';
 
 export default function ReccurentPurchase() {
   const token = JSON.parse(sessionStorage.token)

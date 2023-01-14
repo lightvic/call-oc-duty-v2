@@ -1,10 +1,15 @@
+import PersonelDounghnut from '../../components/PersonnelDoughnut/PersonelDounghnut'
+
 import {
   FilterButton,
   Menu,
   PurchasesContainer,
+  ReccurentPurchase,
+  RecentPurchase,
   RedirectButton,
 } from '../../components'
 import jwt_decode from "jwt-decode"
+import ColocDounghnut from '../../components/ColocDoughnut/ColocDounghnut'
 
 export default function Dashboard() {
   const filters = [
@@ -37,6 +42,10 @@ export default function Dashboard() {
 
 				<div className="dashboard-buttons">
 					<FilterButton filters={filters} />
+          <PersonelDounghnut />
+          <ColocDounghnut />
+          <RecentPurchase />
+          <ReccurentPurchase />
 					{/* <RedirectButton src={''} name={'Filter button'} type={'primary'} /> */}
 				</div>
 				{/* <PurchasesContainer /> */}

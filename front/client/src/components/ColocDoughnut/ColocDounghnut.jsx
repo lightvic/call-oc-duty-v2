@@ -2,10 +2,11 @@ import { $CombinedState } from '@reduxjs/toolkit';
 import React, { PureComponent, useEffect, useState } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import {useNavigate} from "react-router-dom";
+import jwt_decode from 'jwt-decode';
 
 
 export default function ColocDounghnut() {
-  const token = JSON.parse(sessionStorage.token)
+  const token = jwt_decode(sessionStorage.token)
   const navigate = useNavigate()
 
   const [expenses, setExpense]= useState()

@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { IconVector } from "../../../assets"
 import {useNavigate} from "react-router-dom";
+import jwt_decode from 'jwt-decode';
+
 
 export default function RecentPurchase() {
-  const token = JSON.parse(sessionStorage.token)
+  const token = jwt_decode(sessionStorage.token)
   const navigate = useNavigate()
 
 //'/api/unFixExpense/{colocUuid}&{limitDate}'
