@@ -42,8 +42,9 @@ export default function Dashboard() {
           <PurchasesButton button={'Ajouter une dépense'} />
         </div>
 
-        <div className="dashboard-donuts">
+        <div className="dashboard-donuts-container">
           <StatsContainer title={'Dépenses Personnel'} price={'1920,29 €'} />
+          <span className="dashboard-donuts-space"></span>
           <StatsContainer title={'Dépenses de la coloc'} price={'4328,44 €'} />
         </div>
       </div>
