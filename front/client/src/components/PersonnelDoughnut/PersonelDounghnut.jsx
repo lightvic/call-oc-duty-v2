@@ -9,7 +9,7 @@ export default function PersonelDounghnut() {
   const token = jwt_decode(sessionStorage.token)
   const [expenses, setExpense]= useState()
   useEffect(() => {
-    fetch('http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd6&365', {
+    fetch('http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd6', {
       method: "GET",
       headers: new Headers({
         Authorization: 'Bearer ' + token.token
@@ -17,7 +17,7 @@ export default function PersonelDounghnut() {
   })
     .then(data => data.json())
     .then(json => {
-      setExpense(json.colocExpense)
+      setExpense(json.userExpense)
     })
   }, [])
 

@@ -10,7 +10,7 @@ export default function ColocDounghnut() {
 
   const [expenses, setExpense]= useState()
   useEffect(() => {
-    fetch('http://localhost:4557/api/colocStat/42500393-9805-4bca-8b5d-03df0d297927&365', {
+    fetch('http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd', {
       method: "GET",
       headers: new Headers({
         Authorization: 'Bearer ' + token.token
@@ -76,7 +76,7 @@ export default function ColocDounghnut() {
     );
   }
   else{
-    return <h1> pas de dépense</h1>;
+    return null;
   }
 };
 
