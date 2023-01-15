@@ -22,8 +22,8 @@ Password : `calloc`<br>
 Db name`COD`<br>
 
 ## Credit
-Adrien Quimbre
-Valentine Lefebvre
-Victorien Guillerd
-Jean-Baptiste Migone
-Anthony Ringressi
+Adrien Quimbre <br>
+Valentine Lefebvre <br>
+Victorien Guillerd <br>
+Jean-Baptiste Migone <br>
+Anthony Ringressi <br>
