@@ -110,6 +110,7 @@ export default function FlatsharesActionModal() {
           }
         }
         sessionStorage.setItem('coloc_uuid', json.coloc.uuid)
+        sessionStorage.setItem('coloc_name', json.coloc.name)
         navigate('/dashboard')
       })
 

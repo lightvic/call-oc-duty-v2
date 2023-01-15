@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS expenses(
     uuid VARCHAR(50) NOT NULL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     value BIGINT NOT NULL,
-    category ENUM('Courses', 'Charges/Loyer', 'Soirées', 'Abonnements', 'Nécessités', 'Autres'),
+    category ENUM('Courses', 'Charges/Loyer', 'Soirees', 'Abonnements', 'Necessites', 'Autres'),
     type ENUM('Achat', 'Remboursement') NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     fix BOOLEAN DEFAULT '0',

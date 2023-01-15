@@ -30,13 +30,14 @@ export default function Dashboard() {
   ]
   const currentUser = jwt_decode(sessionStorage.token)
   const colocUuid = sessionStorage.getItem('coloc_uuid')
+  const colocName = sessionStorage.getItem('coloc_name')
 
   return (
     <>
       <Menu />
       <div className="dashboard-container">
         <div className="dashboard-info">
-          <p className="dashboard-info__title">Call Oc Duty dashboard</p>
+          <p className="dashboard-info__title">{colocName} dashboard</p>
           <p>Heureux de vous revoir, {(currentUser as any).pseudo} !</p>
         </div>
 

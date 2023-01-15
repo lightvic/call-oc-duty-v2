@@ -66,13 +66,13 @@ class ExpenseController extends Controller
         $otherParticipant[] = $currentUser;
         $toDivid = count($otherParticipant);
         $value = $response['global_value'];
-        $eachDue = - floor(100* $value / $toDivid) / 100;
+        $eachDue = floor(100* $value / $toDivid) / 100;
 
         $diff = $value - $eachDue * $toDivid;
         $token = $this->MakeUuid();
 
         foreach ($otherParticipant as $participant) {
-            $this->setNewExpenseArgs($eachDue, $participant, $response, $token, $diff, $currentUser);
+            $this->setNewExpenseArgs(-$eachDue, $participant, $response, $token, $diff, $currentUser);
         }
 
         $this->setNewExpenseArgs($value, $currentUser, $response, $token);

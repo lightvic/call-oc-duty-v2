@@ -43,11 +43,11 @@ export default function Menu() {
   const windowLocation = window.location.pathname.split('/')[1]
   console.log(windowLocation)
   const currentUser = jwt_decode(sessionStorage.token)
-
+  const colocName = sessionStorage.getItem('coloc_name')
   return (
     <div className="menu-container">
       <div>
-        <FlatsharesInfoContainer flatsharesName={'Call Oc Duty'} />
+        <FlatsharesInfoContainer flatsharesName={colocName as any} />
 
         <div className="menu-buttons">
           {menuButtons.map((button, i) => (

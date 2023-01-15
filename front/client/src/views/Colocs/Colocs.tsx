@@ -32,6 +32,7 @@ export default function Colocs() {
 
   const selectColoc = (e: React.MouseEvent<HTMLButtonElement>) => {
     sessionStorage.setItem('coloc_uuid', e.currentTarget.id)
+    sessionStorage.setItem('coloc_name', e.currentTarget.name)
     navigate('/dashboard')
   }
 
@@ -46,6 +47,7 @@ export default function Colocs() {
               onClick={selectColoc}
               key={i}
               id={coloc.uuid}
+              name = {coloc.name}
             >
               <img className="img-coloc" src="/img.png" alt="" />
               <p>{coloc.name}</p>
