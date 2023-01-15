@@ -41,6 +41,8 @@ export default function RecentPurchase() {
       'Décembre',
     ]
 
+    console.log(purchases)
+
     return (
       <div className="purshases-container purshases-container--recent">
         <div>
@@ -53,16 +55,21 @@ export default function RecentPurchase() {
               <div key={i} className="recent-purchase">
                 <div className="recent-purchase-left">
                   <div className="purchase-category">
-                    <img src="/google.png" alt="" className="purchase-icon" />
+                    <img
+                      src="/basket-logo.jpg"
+                      alt=""
+                      className="purchase-icon"
+                    />
                   </div>
                   <div>
                     <p className="recent-purchase-name">{purchase.name}</p>
                     <p className="recent-purchase-date">
+                      {new Date(purchase.date).getDate()}{' '}
                       {ListMonth[new Date(purchase.date).getMonth()]}
                     </p>
                   </div>
                 </div>
-                <p>{purchase.value} €</p>
+                <p className="recent-purchase-price">{purchase.value} €</p>
               </div>
               <div className="purchases-bar"> </div>
             </>

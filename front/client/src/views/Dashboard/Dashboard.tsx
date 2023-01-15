@@ -53,8 +53,10 @@ export default function Dashboard() {
         </div>
 
         <div className="purchases-container">
-          <ReccurentPurchase />
-          Recent
+          <div>
+            <ReccurentPurchase />
+          </div>
+          <RecentPurchase />
         </div>
       </div>
     </>

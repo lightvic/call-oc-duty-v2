@@ -114,7 +114,13 @@ export default function RecentPurchase() {
           purchases?.map((purchase, i) => (
             <>
               <div key={i} className="purchase">
-                <p>{purchase.category}</p>
+                <div className="purchase-category">
+                  <img
+                    src="/basket-logo.jpg"
+                    alt=""
+                    className="purchase-icon"
+                  />
+                </div>
                 <p>{purchase.name}</p>
                 <p>
                   {new Date(purchase.date).getDate()}{' '}

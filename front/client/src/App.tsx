@@ -30,6 +30,8 @@ function App() {
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/signin" element={<SigninForm />} />
 
+        <Route path="/" element={<SigninForm />} />
+
         <Route
           path={'/select-coloc'}
           element={
