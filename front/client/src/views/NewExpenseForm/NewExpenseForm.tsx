@@ -113,12 +113,14 @@ export default function NewExpenseForm() {
 			type: 'text',
 			name: 'Name',
 			placeholder: 'ex : barbecue du 10/06',
+			length: 4,
 		},
 		{
 			label: 'Montant de la dépense',
 			type: 'number',
 			name: 'value',
 			placeholder: 'ex : 54',
+			length: 4,
 		},
 	]
 	const toggles = [
@@ -203,6 +205,7 @@ export default function NewExpenseForm() {
 						type={input.type}
 						name={input.name}
 						placeholder={input.placeholder}
+						length={input.length}
 					/>
 				))}
 				{toggles.map((toggle, i) => (
