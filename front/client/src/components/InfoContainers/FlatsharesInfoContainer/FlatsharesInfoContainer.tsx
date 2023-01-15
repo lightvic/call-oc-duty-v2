@@ -19,7 +19,7 @@ export default function FlatsharesInfoContainer({
   ]
   return (
     <button className="flatshares-info-container">
-      <img className="flatshares-image" src="/img.jpeg" alt="Flatshare image" />
+      <img className="flatshares-image" src="/img.png" alt="Flatshare image" />
       <ButtonDropdown
         buttonStyle={'flatshares'}
         title={flatsharesName}
@@ -29,7 +29,3 @@ export default function FlatsharesInfoContainer({
     </button>
   )
 }
-
-// On click -> button dropdown with flatshares, modify button, create new flatshares
-// On click modify button / "create new flateshares" -> open modal
-// modify / create -> open modal

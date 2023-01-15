@@ -25,3 +25,22 @@
 
   z-index: 999;
 }
+
+.title-modal {
+  display: flex;
+  justify-content: space-between;
+
+  font-family: Inter-Medium;
+  font-size: 1.125rem;
+
+  margin-bottom: 24px;
+
+  align-items: center;
+}
+
+.close-modal {
+  cursor: pointer;
+
+  padding: 8px;
+  margin-right: -8px;
+}

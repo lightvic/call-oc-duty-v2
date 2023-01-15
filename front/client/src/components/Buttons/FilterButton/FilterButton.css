@@ -5,12 +5,12 @@
 
   background-color: var(--white);
 
-  border: solid 1px var(--main-color);
+  border: solid 1px var(--grey);
   border-radius: 8px;
 }
 
 .filter {
-  border-right: solid 1px var(--main-color);
+  border-right: solid 1px var(--ligth-grey);
 
   padding: 10px 12px;
 

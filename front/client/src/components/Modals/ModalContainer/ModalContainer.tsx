@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { IconClose } from '../../../assets'
 
 export default function ModalContainer({
   children,
@@ -7,14 +8,26 @@ export default function ModalContainer({
   children: React.ReactNode
   isOpen: boolean
 }) {
-  const [openModal, setOpenModal] = useState(false)
+  const closeModal = () => {
+    ;(document.querySelector(
+      '.modal-page',
+    ) as HTMLElement | null)!.style.display = 'none'
+  }
 
   return (
     <div
       className="modal-page"
       style={isOpen ? { display: 'flex' } : { display: 'none' }}
     >
-      <div className="modal-container">{children}</div>
+      <div className="modal-container">
+        <div className="title-modal">
+          Renseigner les informations
+          <span onClick={closeModal} className="close-modal">
+            <IconClose />
+          </span>
+        </div>
+        {children}
+      </div>
     </div>
   )
 }

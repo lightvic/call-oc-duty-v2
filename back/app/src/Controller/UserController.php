@@ -36,7 +36,7 @@ class UserController extends Controller
             die();
         }
         $this->renderJSON([
-            "error" => 'utilisateur invalide'
+            "error" => "Les informations entrées ne sont pas bonnes."
         ]);
         die();
     }
@@ -70,7 +70,7 @@ class UserController extends Controller
             die();
         }
         $this->renderJSON([
-            'error' => 'Mot de passe ou utilisateur invalide'
+            'error' => 'Le mail entré est déjà utilisé.'
         ]);
         die();
     }

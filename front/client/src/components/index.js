@@ -1,5 +1,5 @@
 // Buttons
-import OpenModalButton from './Buttons/OpenModalButton/OpenModalButton'
+import PurchasesButton from './Buttons/PurchasesButton/PurchasesButton'
 import ButtonAction from './Buttons/ButtonAction/ButtonAction'
 import ButtonWithIcon from './Buttons/ButtonWithIcon/ButtonWithIcon'
 import FilterButton from './Buttons/FilterButton/FilterButton'
@@ -31,11 +31,12 @@ import RecentPurchase from './Purchases/RecentPurchase/RecentPurchase'
 // Notifications
 import Toast from './Toast/Toast'
 
-// test
-import NewColoc from './test/NewColoc'
+// Stats
+import StatsContainer from './Stats/StatsContainer/StatsContainer'
+import PersonelDounghnut from './Stats/PersonalStat/PersonelDounghnut'
 
 export {
-  OpenModalButton,
+  PurchasesButton,
   ButtonAction,
   ButtonWithIcon,
   FilterButton,
@@ -54,7 +55,6 @@ export {
   RedirectButton,
   ButtonDropdown,
   Toast,
-
-  //test
-  NewColoc,
+  StatsContainer,
+  PersonelDounghnut,
 }

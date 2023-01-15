@@ -1,5 +1,5 @@
 /* Buttons */
-@import './Buttons/OpenModalButton/OpenModalButton';
+@import './Buttons/PurchasesButton/PurchasesButton';
 @import './Buttons/ButtonAction/ButtonAction';
 @import './Buttons/ButtonWithIcon/ButtonWithIcon';
 @import './Buttons/FilterButton/FilterButton';
@@ -27,3 +27,6 @@
 @import './Purchases/PurchasesContainer/PurchasesContainer';
 @import './Purchases/ReccurentPurchase/ReccurentPurchase';
 @import './Purchases/RecentPurchase/RecentPurchase';
+
+/* Stats */
+@import './Stats/StatsContainer/StatsContainer';

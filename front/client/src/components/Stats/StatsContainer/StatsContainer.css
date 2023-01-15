@@ -1,0 +1,61 @@
+.stats-container {
+  width: 100%;
+
+  background-color: white;
+
+  border: solid 1px var(--grey);
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: space-between;
+
+  padding: 20px;
+}
+
+.stats-info {
+  display: flex;
+  gap: 20px;
+}
+
+.stats-info-text p:nth-child(1) {
+  font-family: Inter-SemiBold;
+  font-size: 1rem;
+}
+
+.stats-info-text p:nth-child(2) {
+  font-family: Inter-Light;
+  font-size: 0.75rem;
+
+  margin: 30px 0 8px 0;
+}
+
+.stats-info-text p:nth-child(3) {
+  font-family: Inter-Bold;
+  font-size: 1.5rem;
+}
+
+.donut {
+  width: 108px;
+}
+
+.stats-buttons {
+  display: flex;
+  gap: 4px;
+
+  cursor: pointer;
+
+  height: fit-content;
+}
+
+.stats-buttons div {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 100%;
+
+  background-color: var(--grey);
+}
+
+.stats-buttons:hover div {
+  background-color: var(--main-color);
+}
