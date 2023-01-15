@@ -3,13 +3,21 @@ body {
 }
 
 .dashboard-container {
-  margin-left: 252px;
   padding: 28px;
   height: 100vh;
+
+  margin-left: 252px;
 }
 
-.dashboard-info {
+/* .dashboard-info {
   margin-bottom: 34px;
+} */
+
+.dashboard-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 24px 0;
 }
 
 .dashboard-info__title {
@@ -17,4 +25,11 @@ body {
   font-size: 1.25rem;
 
   margin-bottom: 12px;
+}
+
+.dashboard-donuts {
+  display: flex;
+  gap: 28px;
+
+  margin-right: -28px;
 }

@@ -1,0 +1,83 @@
+.coloc-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}
+
+.user-colocs {
+  border-radius: 8px;
+  background-color: var(--white);
+
+  padding: 40px;
+
+  width: 500px;
+}
+
+.coloc-title {
+  font-family: Inter-Medium;
+  font-size: 1.125rem;
+  align-items: start;
+  margin-bottom: 28px;
+}
+
+.coloc {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 10px;
+  grid-template-areas: 'a b b b b b c c c c c c d d d';
+  align-items: center;
+
+  width: 100%;
+
+  border-radius: 8px;
+
+  padding: 10px;
+  margin-bottom: 28px;
+}
+
+.coloc:hover {
+  background-color: var(--choice-hover);
+}
+
+.coloc p:first-child {
+  grid-area: a;
+}
+.coloc p:nth-child(2) {
+  grid-area: b;
+}
+.coloc p:nth-child(3) {
+  grid-area: c;
+}
+.coloc p:last-child {
+  grid-area: d;
+}
+
+.img-coloc {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 100%;
+
+  object-fit: cover;
+}
+
+.new-coloc-button {
+  background-color: var(--main-color);
+  color: var(--white);
+
+  border-radius: 4px;
+
+  padding: 12px 0;
+  width: 100%;
+}
+
+.new-coloc-button:hover {
+  background-color: var(--main-color-hover);
+}
+
+.new-coloc-button :active {
+  background-color: var(--main-color-active);
+}

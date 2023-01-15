@@ -1,22 +1,18 @@
-.coloc-modal form {
-  display: flex;
-  flex-direction: column;
-}
-
-.create-coloc {
+.add-purchases {
   background-color: var(--main-color);
   color: var(--white);
 
   border-radius: 4px;
 
-  padding: 12px 0;
-  width: 100%;
+  padding: 10px 0;
+
+  width: 180px;
 }
 
-.create-coloc:hover {
+.add-purchases:hover {
   background-color: var(--main-color-hover);
 }
 
-.create-coloc :active {
+.add-purchases:active {
   background-color: var(--main-color-active);
 }

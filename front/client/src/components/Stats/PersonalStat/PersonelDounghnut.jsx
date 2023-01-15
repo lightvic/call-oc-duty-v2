@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import React, { PureComponent } from 'react'
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'
 
 const data = [
   { name: 'Courses', value: 100 },
@@ -8,17 +8,24 @@ const data = [
   { name: 'Abonnements', value: 200 },
   { name: 'Nécessités', value: 200 },
   { name: 'Autres', value: 200 },
-];
+]
 console.log(data[1].name)
 console.log(data[1].value)
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#73BFB8','#E8FCCF'];
+const COLORS = [
+  '#0088FE',
+  '#00C49F',
+  '#FFBB28',
+  '#FF8042',
+  '#73BFB8',
+  '#E8FCCF',
+]
 
 export default class PersonelDounghnut extends PureComponent {
   render() {
     return (
-        <div>
-        <PieChart width={800} height={400} >
-            <Pie
+      <div>
+        <PieChart width={800} height={400}>
+          <Pie
             data={data}
             cx={120}
             cy={200}
@@ -26,14 +33,16 @@ export default class PersonelDounghnut extends PureComponent {
             outerRadius={80}
             paddingAngle={0}
             dataKey="value"
-            >
+          >
             {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
             ))}
-            </Pie>
+          </Pie>
         </PieChart>
       </div>
-    );
+    )
   }
 }
-

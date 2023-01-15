@@ -2,8 +2,8 @@ import React, { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import InputForm from '../../Inputs/InputForm/InputForm'
 import jwt_decode from 'jwt-decode'
+import { Toast } from '../../index'
 
-// export interface formDataInterface extends Record<string, string> {
 export interface formDataInterface {
   name: string
   address: string
@@ -12,8 +12,6 @@ export interface formDataInterface {
   users: string[]
 }
 
-// post_code doit etre string et pas un int
-
 export default function FlatsharesActionModal() {
   const inputs = [
     {
@@ -21,55 +19,53 @@ export default function FlatsharesActionModal() {
       type: 'text',
       name: '',
       placeholder: 'Call Oc Duty',
+      length: 6,
     },
     {
       label: 'Ville',
       type: 'text',
       name: 'town',
       placeholder: 'Paris',
+      length: 4,
     },
     {
       label: 'Adresse',
       type: 'text',
       name: 'address',
       placeholder: '27 rue du progès',
+      length: 8,
     },
     {
       label: 'Code postal',
-      type: 'int',
+      type: 'number',
       name: 'post_code',
       placeholder: '75004',
+      length: 4,
     },
     {
-      label: 'Colocataire 1',
+      label: 'Premier colocataire',
       type: 'text',
       name: 'email',
-      placeholder: 'Coloc1',
+      placeholder: 'premier-coloc@gmail.com',
+      length: 8,
     },
     {
-      label: 'Colocataire 2',
+      label: 'Deuxième colocataire',
       type: 'text',
       name: 'email',
-      placeholder: 'Coloc2',
-    },
-    {
-      label: 'Colocataire 3',
-      type: 'text',
-      name: 'email',
-      placeholder: 'Coloc3',
-    },
-    {
-      label: 'Colocataire 4',
-      type: 'text',
-      name: 'email',
-      placeholder: 'Coloc4',
+      placeholder: 'deuxième-coloc@gmail.com',
+      length: 8,
     },
   ]
+  const [showToast, setShowToast] = useState(false)
+  const [typeToast, setTypeToast] = useState('')
+  const [messageToast, setMessageToast] = useState('')
 
   const token = JSON.parse(sessionStorage.token)
   const navigate = useNavigate()
 
   const addFlatshares = (e: FormEvent<HTMLFormElement>) => {
+    setShowToast(false)
     e.preventDefault()
 
     const form = document.querySelectorAll('form')[0]
@@ -80,7 +76,7 @@ export default function FlatsharesActionModal() {
       if (i < 4) {
         info.push((form[i] as HTMLInputElement).value)
       }
-      if (i >= 4 && i < 8) {
+      if (i >= 4 && i < 6) {
         email.push((form[i] as HTMLInputElement).value)
       }
     }
@@ -92,16 +88,10 @@ export default function FlatsharesActionModal() {
       address: info[1],
       town: info[2],
       post_code: info[3],
-      users: [
-        (currentUser as any).email,
-        email[0],
-        email[1],
-        email[2],
-        email[3],
-      ],
+      users: [(currentUser as any).email, email[0], email[1]],
     }
 
-    fetch('http://localhost:4557/api/newColoc', {
+    const submit = fetch('http://localhost:4557/api/newColoc', {
       method: 'POST',
       mode: 'cors',
       body: JSON.stringify(data),
@@ -119,13 +109,20 @@ export default function FlatsharesActionModal() {
             navigate('/signin')
           }
         }
-        const coloc_uuid = json.coloc.uuid
-        navigate(`/dashboard/${coloc_uuid}`)
+        localStorage.setItem('coloc_uuid', json.coloc.uuid)
+        navigate('/dashboard')
       })
+
+    const array = info.concat(email)
+    if (array.includes('')) {
+      setShowToast(true)
+      setTypeToast('error')
+      setMessageToast('Tous les champs doivent être remplit')
+    } else submit
   }
 
   return (
-    <>
+    <div className="coloc-modal">
       <form onSubmit={addFlatshares}>
         {inputs.map((input, i) => (
           <InputForm
@@ -134,12 +131,14 @@ export default function FlatsharesActionModal() {
             type={input.type}
             name={input.name}
             placeholder={input.placeholder}
+            length={input.length}
           />
         ))}
-        <button type="submit">Save</button>
+        <button className="create-coloc" type="submit">
+          Créer une nouvelle coloc
+        </button>
       </form>
-    </>
+      <Toast show={showToast} type={typeToast} message={messageToast} />
+    </div>
   )
 }
-
-// Create flatshares || Modify flathsares

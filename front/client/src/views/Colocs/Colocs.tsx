@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FlatsharesActionModal, ModalContainer } from '../../components'
 
@@ -31,26 +31,38 @@ export default function Colocs() {
   }
 
   const selectColoc = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // e.currentTarget.id
+    localStorage.setItem('coloc_uuid', e.currentTarget.id)
     navigate('/dashboard')
   }
 
   return (
-    <>
-      {colocs &&
-        colocs.map((coloc, i) => (
-          <button onClick={selectColoc} key={i} id={coloc.uuid}>
-            <p>{coloc.address}</p>
-            <p>{coloc.town}</p>
-            <p>{coloc.post_code}</p>
-          </button>
-        ))}
-      <button onClick={addNewColoc}>Nouvelle coloc</button>
+    <div className="coloc-container">
+      <div className="user-colocs">
+        <p className="coloc-title">Sélectionner ou créer une nouvelle coloc</p>
+        {colocs &&
+          colocs.map((coloc, i) => (
+            <button
+              className="coloc"
+              onClick={selectColoc}
+              key={i}
+              id={coloc.uuid}
+            >
+              <img className="img-coloc" src="/img.png" alt="" />
+              <p>{coloc.name}</p>
+              <p>{coloc.town}</p>
+              <p>{coloc.address}</p>
+            </button>
+          ))}
+        <button className="new-coloc-button" onClick={addNewColoc}>
+          Nouvelle coloc
+        </button>
+      </div>
+
       <div>
         <ModalContainer isOpen={openModal}>
           <FlatsharesActionModal />
         </ModalContainer>
       </div>
-    </>
+    </div>
   )
 }

@@ -6,6 +6,7 @@ import IconPot from './IconPot'
 import IconStats from './IconStats'
 import IconTodo from './IconTodo'
 import IconVector from './IconVector'
+import IconClose from './IconClose'
 
 export {
   IconNotifications,
@@ -16,4 +17,5 @@ export {
   IconPot,
   IconVector,
   IconLogout,
+  IconClose,
 }
