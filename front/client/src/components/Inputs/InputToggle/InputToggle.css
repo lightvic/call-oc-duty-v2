@@ -1,0 +1,17 @@
+.input-toggle-title {
+  font-size: 14px;
+}
+
+.input-toggle-input {
+  margin: 0 8px 12px 0;
+}
+
+.input-toggle-container {
+  margin: 8px 12px;
+}
+
+.input-toggle-container label {
+  font-family: Inter-light;
+
+  font-size: 14px;
+}

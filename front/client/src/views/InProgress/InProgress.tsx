@@ -5,7 +5,7 @@ export default function InProgress() {
     <>
       <Menu />
       <div className="in-progress">
-        <p>En cours de développement</p>
+        <p>En cours de développement...</p>
       </div>
     </>
   )

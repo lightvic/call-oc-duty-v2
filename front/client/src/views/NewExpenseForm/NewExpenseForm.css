@@ -1,0 +1,28 @@
+.new-expense-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-expense-toggle {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.new-expense-submit {
+  margin-top: 20px;
+  background-color: var(--main-color);
+  color: var(--white);
+
+  border-radius: 4px;
+
+  padding: 12px 0;
+  width: 100%;
+}
+
+.new-expense-submit:hover {
+  background-color: var(--main-color-hover);
+}
+
+.new-expense-submit:active {
+  background-color: var(--main-color-active);
+}

@@ -11,6 +11,7 @@ export default function ButtonDropdown({
   title: string
   choices: {
     value: string
+    href: string
   }[]
   defaultValue: string
   buttonStyle: string
@@ -61,9 +62,14 @@ export default function ButtonDropdown({
           style={isShow ? { display: 'block' } : { display: 'none' }}
         >
           {choices.map((choice, i) => (
-            <div key={i} className="choice" onClick={getChoice}>
+            <a
+              href={choice.href}
+              key={i}
+              className="choice"
+              onClick={getChoice}
+            >
               {choice.value}
-            </div>
+            </a>
           ))}
         </div>
       </button>

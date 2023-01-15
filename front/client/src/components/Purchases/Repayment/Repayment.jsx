@@ -23,7 +23,8 @@ export default function Repayment() {
         setRepayment(json.expenses)
       })
   }, [])
-  if (repayments != null) {
+  console.log(repayments)
+  if (repayments) {
     return (
       <>
         <div className="purshases-container purshases-container--repayment">
@@ -31,8 +32,8 @@ export default function Repayment() {
             <p className="purchases-title">Remboursement</p>
             <div className="purchases-bar"> </div>
           </div>
-          {repayments.map((repayment) => (
-            <div>
+          {repayments.map((repayment, i) => (
+            <div key={i}>
               <div className="repayment">
                 <p>
                   <span className="repayment-span">{repayment.this_user}</span>{' '}

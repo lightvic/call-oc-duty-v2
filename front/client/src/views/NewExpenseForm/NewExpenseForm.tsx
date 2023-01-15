@@ -17,10 +17,12 @@ export default function NewExpenseForm() {
   const colocUuid = sessionStorage.getItem('coloc_uuid')
   const token = JSON.parse(sessionStorage.token)
   const navigate = useNavigate()
+
   const [showToast, setShowToast] = useState(false)
   const [typeToast, setTypeToast] = useState('')
   const [messageToast, setMessageToast] = useState('')
   const [members, setMembers] = useState([])
+
   useEffect(() => {
     fetch(`http://localhost:4557/api/modifyInfo/${colocUuid}`, {
       method: 'GET',
@@ -91,49 +93,45 @@ export default function NewExpenseForm() {
         if (json.success) {
           location.reload()
         }
-        setShowToast((showToast) => !showToast)
-        setTypeToast('error')
-        setMessageToast({ isError: true, message: json.error }.message)
-        console.log(json)
       })
   }
 
   const inputs = [
     {
-      label: 'Nom de la dépense',
+      label: 'Nom',
       type: 'text',
       name: 'Name',
-      placeholder: 'ex : barbecue du 10/06',
+      placeholder: 'Barbecue, bières, ...',
       length: 4,
     },
     {
-      label: 'Montant de la dépense',
+      label: 'Montant',
       type: 'number',
       name: 'value',
-      placeholder: 'ex : 54',
+      placeholder: '10',
       length: 4,
     },
   ]
   const toggles = [
     {
       type: 'radio',
-      legend: 'Est-ce une dépense mensuelle ?',
+      legend: 'Type de dépense',
       choices: [
         {
           name: 'fix',
           value: 1,
-          content: 'Oui',
+          content: 'Récurrente',
         },
         {
           name: 'fix',
           value: 0,
-          content: 'Non',
+          content: 'Ponctuelle',
         },
       ],
     },
     {
       type: 'radio',
-      legend: 'Catégories',
+      legend: 'Catégorie',
       choices: [
         {
           name: 'category',
@@ -168,13 +166,16 @@ export default function NewExpenseForm() {
       ],
     },
   ]
+  console.log()
   const membersChoices = Array()
   ;(members as any).forEach(function (users: any) {
-    membersChoices.push({
-      name: users.pseudo,
-      value: users.uuid,
-      content: users.pseudo,
-    })
+    if (users.uuid !== currentUser?.uuid) {
+      membersChoices.push({
+        name: users.pseudo,
+        value: users.uuid,
+        content: users.pseudo,
+      })
+    }
   })
 
   toggles.push({
@@ -185,30 +186,34 @@ export default function NewExpenseForm() {
 
   return (
     <>
-      <form id="NewExpenseForm" onSubmit={handleSubmit}>
-        {inputs.map((input, i) => (
-          <InputForm
-            key={i}
-            label={input.label}
-            type={input.type}
-            name={input.name}
-            placeholder={input.placeholder}
-            length={input.length}
-          />
-        ))}
-        {toggles.map((toggle, i) => (
-          <InputToggle
-            key={i}
-            type={toggle.type}
-            legend={toggle.legend}
-            choices={toggle.choices}
-          />
-        ))}
-        <p>
-          Utilisateur connecté (et donc qui paye) :{' '}
-          {(currentUser as any).pseudo}
-        </p>
-        <button type="submit">Enregistrer</button>
+      <form onSubmit={handleSubmit}>
+        <div className="new-expense-inputs">
+          {inputs.map((input, i) => (
+            <InputForm
+              key={i}
+              label={input.label}
+              type={input.type}
+              name={input.name}
+              placeholder={input.placeholder}
+              length={input.length}
+            />
+          ))}
+        </div>
+
+        <div className="new-expense-toggle">
+          {toggles.map((toggle, i) => (
+            <InputToggle
+              key={i}
+              type={toggle.type}
+              legend={toggle.legend}
+              choices={toggle.choices}
+            />
+          ))}
+        </div>
+
+        <button className="new-expense-submit" type="submit">
+          Ajouter une nouvelle dépense
+        </button>
       </form>
       <Toast show={showToast} type={typeToast} message={messageToast} />
     </>

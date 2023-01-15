@@ -10,8 +10,9 @@
   font-size: 14px;
 }
 
+.purshases-container--repayment,
 .purshases-container--reccurent {
-  width: 593px;
+  width: 580px;
 }
 
 .purshases-container--recent {

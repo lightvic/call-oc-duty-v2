@@ -103,6 +103,7 @@ class ExpenseRepository extends Repository
             FROM `expenses`
             WHERE `coloc_uuid` = :colocUuid
             AND `user_uuid` = :userUuid
+            AND `value` > 0
             AND `type` = "Achat"
             GROUP BY `category`';
 

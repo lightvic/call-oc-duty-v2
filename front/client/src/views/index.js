@@ -4,6 +4,7 @@ import Dashboard from './Dashboard/Dashboard'
 import InProgress from './InProgress/InProgress'
 import Home from './Home/Home'
 import Colocs from './Colocs/Colocs'
+import NewExpenseForm from './NewExpenseForm/NewExpenseForm'
 
 export {
   SigninForm,
@@ -12,4 +13,5 @@ export {
   InProgress,
   Home,
   Colocs,
+  NewExpenseForm,
 }

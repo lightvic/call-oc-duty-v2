@@ -8,13 +8,12 @@ export default function FlatsharesInfoContainer({
 }) {
   const choices = [
     {
-      value: 'Modifier ma coloc',
-    },
-    {
       value: 'Ajouter une nouvelle coloc',
+      href: '/select-coloc',
     },
     {
       value: 'Voir mes autres coloc',
+      href: '/select-coloc',
     },
   ]
   return (
