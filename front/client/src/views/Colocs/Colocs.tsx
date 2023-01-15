@@ -31,7 +31,7 @@ export default function Colocs() {
   }
 
   const selectColoc = (e: React.MouseEvent<HTMLButtonElement>) => {
-    localStorage.setItem('coloc_uuid', e.currentTarget.id)
+    sessionStorage.setItem('coloc_uuid', e.currentTarget.id)
     navigate('/dashboard')
   }
 

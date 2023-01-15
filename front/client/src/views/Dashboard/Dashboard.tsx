@@ -1,9 +1,7 @@
 import {
   PersonelDounghnut,
-  PurchasesContainer,
   ReccurentPurchase,
   RecentPurchase,
-  RedirectButton,
   FilterButton,
   Menu,
   PurchasesButton,
@@ -32,7 +30,7 @@ export default function Dashboard() {
     },
   ]
   const currentUser = jwt_decode(sessionStorage.token)
-  const colocUuid = localStorage.getItem('coloc_uuid')
+  const colocUuid = sessionStorage.getItem('coloc_uuid')
 
   return (
     <>
@@ -42,26 +40,22 @@ export default function Dashboard() {
           <p className="dashboard-info__title">Call Oc Duty dashboard</p>
           <p>Heureux de vous revoir, {(currentUser as any).pseudo} !</p>
         </div>
-        <div className="dashboard-donuts">
-          <StatsContainer title={'Dépenses Personnel'} price={'1920,29 €'} />
-          <StatsContainer title={'Dépenses de la coloc'} price={'4328,44 €'} />
-        </div>
+
         <div className="dashboard-buttons">
           <FilterButton filters={filters} />
-          <PersonelDounghnut />
-          <ColocDounghnut />
-          <RecentPurchase />
-          <ReccurentPurchase />
-          {/* <RedirectButton src={''} name={'Filter button'} type={'primary'} /> */}
           <PurchasesButton button={'Ajouter une dépense'} />
         </div>
 
-        {/* <PurchasesContainer /> */}
         <div className="dashboard-donuts-container">
           <StatsContainer title={'Dépenses Personnel'} price={'1920,29 €'} />
           <span className="dashboard-donuts-space"></span>
           <StatsContainer title={'Dépenses de la coloc'} price={'4328,44 €'} />
         </div>
+
+        <PersonelDounghnut />
+        <ColocDounghnut />
+        <RecentPurchase />
+        <ReccurentPurchase />
       </div>
     </>
   )
