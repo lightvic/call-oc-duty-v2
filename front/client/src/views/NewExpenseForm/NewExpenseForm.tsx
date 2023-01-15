@@ -89,7 +89,7 @@ export default function NewExpenseForm() {
           navigate('/signin')
         }
         if (json.success) {
-          navigate('/dashboard')
+          location.reload()
         }
         setShowToast((showToast) => !showToast)
         setTypeToast('error')
@@ -148,7 +148,7 @@ export default function NewExpenseForm() {
         {
           name: 'category',
           value: 'Soirees',
-          content: 'Soirees',
+          content: 'Soirées',
         },
         {
           name: 'category',
@@ -158,7 +158,7 @@ export default function NewExpenseForm() {
         {
           name: 'category',
           value: 'Necessites',
-          content: 'Necessites',
+          content: 'Nécessités',
         },
         {
           name: 'category',
