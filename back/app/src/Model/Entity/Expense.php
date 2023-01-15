@@ -9,11 +9,30 @@ class Expense extends BaseEntity
     private ?string $name = null;
     private null|int|float $value = null;
     private ?string $type = null;
+    private ?string $category = null;
     private ?DateTime $date = null;
     private ?string $fix = null;
     private ?string $token = null;
     private ?string $userUuid = null;
     private ?string $colocUuid = null;
+
+    /**
+     * @return string|null
+     */
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string|null $category
+     */
+    public function setCategory(?string $category): void
+    {
+        $this->category = $category;
+    }
+
+
 
     /**
      * @return string|null

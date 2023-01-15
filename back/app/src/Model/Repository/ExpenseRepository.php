@@ -8,7 +8,6 @@ class ExpenseRepository extends Repository
 {
     /**
      * @param string $colocUuid
-     * @param string $limitDate
      * @return array|null
      */
     public function getAllUnfixExpenseByColocUuid(string $colocUuid): ?array
@@ -38,7 +37,6 @@ class ExpenseRepository extends Repository
 
     /**
      * @param string $colocUuid
-     * @param string $limitDate
      * @return array|null
      */
     public function getAllfixExpenseByColocUuid(string $colocUuid): ?array
@@ -68,7 +66,6 @@ class ExpenseRepository extends Repository
 
     /**
      * @param string $colocUuid
-     * @param string $limitDate
      * @return array|null
      */
     public function getAllExpenseByColocUuid(string $colocUuid): ?array
@@ -97,7 +94,6 @@ class ExpenseRepository extends Repository
     /**
      * @param string $colocUuid
      * @param string $userUuid
-     * @param string $limitDate
      * @return array|null
      */
     public function getSumAllExpenseByColocAndUser(string $colocUuid, string $userUuid): ?array
@@ -107,14 +103,13 @@ class ExpenseRepository extends Repository
             FROM `expenses`
             WHERE `coloc_uuid` = :colocUuid
             AND `user_uuid` = :userUuid
-            AND date BETWEEN :limit AND NOW()
             AND `value` > 0
+            AND `type` = "Achat"
             GROUP BY `category`';
 
         $query = $this->pdo->prepare($expense);
         $query->bindValue(":colocUuid", $colocUuid);
         $query->bindValue(":userUuid", $userUuid);
-        $query->bindValue(":limit", $limitDate);
         $query->execute();
 
         $expenses = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -127,7 +122,6 @@ class ExpenseRepository extends Repository
     /**
      * @param string $colocUuid
      * @param string $userUuid
-     * @param string $limitDate
      * @return array|null
      */
     public function getAllExpenseByColocAndUser(string $colocUuid, string $userUuid): array
@@ -181,14 +175,15 @@ class ExpenseRepository extends Repository
     public function insertExpense(Expense $expense): bool
     {
         $newExpense =
-            'INSERT INTO `expenses` (uuid, name, value, type, user_uuid, coloc_uuid, fix, token)
-            VALUES (:uuid, :name, :value, :type, :user_uuid, :coloc_uuid, :fix, :token)';
+            'INSERT INTO `expenses` (uuid, name, value, type, category, user_uuid, coloc_uuid, fix, token)
+            VALUES (:uuid, :name, :value, :type, :category, :user_uuid, :coloc_uuid, :fix, :token)';
 
         $query = $this->pdo->prepare($newExpense);
         $query->bindValue(':uuid', $expense->getUuid());
         $query->bindValue(':name', $expense->getName());
         $query->bindValue(':value', $expense->getValue());
         $query->bindValue(':type', $expense->getType());
+        $query->bindValue(':category', $expense->getCategory());
         $query->bindValue(':user_uuid', $expense->getUserUuid());
         $query->bindValue(':coloc_uuid', $expense->getColocUuid());
         $query->bindValue(':fix', $expense->getFix());

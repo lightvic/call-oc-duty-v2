@@ -10,7 +10,7 @@ export default function ReccurentPurchase() {
 //'/api/unFixExpense/{colocUuid}&{limitDate}'
   const [purchases, setPurchases]= useState()
   useEffect(() => {
-    fetch('http://localhost:4557/api/fixExpense/44a36f45-010f-4bf7-a7f0-8434108fecd6&365', {
+    fetch('http://localhost:4557/api/fixExpense/44a36f45-010f-4bf7-a7f0-8434108fecd6', {
       method: "GET",
       headers: new Headers({
         Authorization: 'Bearer ' + token.token
@@ -30,7 +30,7 @@ export default function ReccurentPurchase() {
   console.log(date.getDate())
   if (purchases != null){
     const ListMonth = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Sptembre",
-                      "Octobre","Novembre","Décembre"]    
+                      "Octobre","Novembre","Décembre"]
     // const expenseDate = new Date(purchase.date)
     return(
       purchases.map((purchase) =>

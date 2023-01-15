@@ -6,12 +6,12 @@ import jwt_decode from 'jwt-decode';
 
 
 export default function ColocDounghnut() {
-  const token = jwt_decode(sessionStorage.token)
+  const token = JSON.parse(sessionStorage.token)
   const navigate = useNavigate()
 
   const [expenses, setExpense]= useState()
   useEffect(() => {
-    fetch('http://localhost:4557/api/colocStat/42500393-9805-4bca-8b5d-03df0d297927&365', {
+    fetch('http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd6', {
       method: "GET",
       headers: new Headers({
         Authorization: 'Bearer ' + token.token
@@ -26,7 +26,7 @@ export default function ColocDounghnut() {
     setExpense(json.colocExpense)
   })
 }, [])
-    
+
     if (expenses != null){
       var totalValue = 0
       const COLORS = []
@@ -36,7 +36,7 @@ export default function ColocDounghnut() {
       expenses.map((expenses,index) => (
         data.push({name: expenses.category, value: parseInt(expenses.value)})
       ));
-    
+
       data.forEach((category)=>{
         if (category.name === 'Charges/Loyer'){
           COLORS.push('#0088FE')
@@ -59,7 +59,7 @@ export default function ColocDounghnut() {
       })
       data.forEach((value)=>{
         totalValue = totalValue + value
-      })    
+      })
       return (
         <div>
           <PieChart width={800} height={400} >
