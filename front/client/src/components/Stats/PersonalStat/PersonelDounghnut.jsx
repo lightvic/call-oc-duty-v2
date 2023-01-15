@@ -1,68 +1,27 @@
-import { $CombinedState } from '@reduxjs/toolkit'
-import React, { PureComponent, useEffect, useState } from 'react'
+import React, { PureComponent } from 'react'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'
-import jwt_decode from 'jwt-decode'
-import { useNavigate } from 'react-router-dom'
 
-// #[Route('/api/colocStat/{colocUuid}&{limitDate}', 'colocStat', ['GET'])] => route à envoyer
+const data = [
+  { name: 'Courses', value: 100 },
+  { name: 'Charges/Loyer', value: 300 },
+  { name: 'Soirée', value: 300 },
+  { name: 'Abonnements', value: 200 },
+  { name: 'Nécessités', value: 200 },
+  { name: 'Autres', value: 200 },
+]
+console.log(data[1].name)
+console.log(data[1].value)
+const COLORS = [
+  '#0088FE',
+  '#00C49F',
+  '#FFBB28',
+  '#FF8042',
+  '#73BFB8',
+  '#E8FCCF',
+]
 
-export default function PersonelDounghnut() {
-  const token = JSON.parse(sessionStorage.token)
-  const navigate = useNavigate()
-  const [expenses, setExpense] = useState()
-  useEffect(() => {
-    fetch(
-      'http://localhost:4557/api/colocStat/44a36f45-010f-4bf7-a7f0-8434108fecd6',
-      {
-        method: 'GET',
-        headers: new Headers({
-          Authorization: 'Bearer ' + token.token,
-        }),
-      },
-    )
-      .then((data) => data.json())
-      .then((json) => {
-        if (json.message === 'invalid cred') {
-          sessionStorage.removeItem('token')
-          navigate('/signin')
-        }
-        setExpense(json.userExpense)
-      })
-  }, [])
-
-  if (expenses != null) {
-    const COLORS = []
-    const data = [{ name: 'Nécessités', value: 200 }]
-    console.log(expenses)
-
-    expenses.map((expenses, index) =>
-      data.push({ name: expenses.category, value: parseInt(expenses.value) }),
-    )
-
-    data.forEach((category) => {
-      if (category.name === 'Charges/Loyer') {
-        COLORS.push('#0088FE')
-      }
-      if (category.name === 'Courses') {
-        COLORS.push('#00C49F')
-      }
-      if (category.name === 'Soirées') {
-        COLORS.push('#FFBB28')
-      }
-      if (category.name === 'Abonnements') {
-        COLORS.push('#FF8042')
-      }
-      if (category.name === 'Nécessités') {
-        COLORS.push('#73BFB8')
-      }
-      if (category.name === 'Autres') {
-        COLORS.push('#E8FCCF')
-      }
-    })
-
-    console.log(COLORS)
-    // const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#73BFB8','#E8FCCF'];
-
+export default class PersonelDounghnut extends PureComponent {
+  render() {
     return (
       <div>
         <PieChart width={800} height={400}>
@@ -81,12 +40,9 @@ export default function PersonelDounghnut() {
                 fill={COLORS[index % COLORS.length]}
               />
             ))}
-            ;
           </Pie>
         </PieChart>
       </div>
     )
-  } else {
-    return null
   }
 }
