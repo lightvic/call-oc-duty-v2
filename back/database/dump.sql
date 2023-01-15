@@ -43,17 +43,17 @@ ALTER TABLE users_colocs ADD CONSTRAINT users_colocs_user_uuid_foreign FOREIGN K
 ALTER TABLE users_colocs ADD CONSTRAINT users_colocs_coloc_uuid_foreign FOREIGN KEY (`coloc_uuid`) REFERENCES `colocs`(`uuid`) ON DELETE CASCADE;
 
 INSERT INTO users (uuid, pseudo, email, pwd) VALUES
-('0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', 'jb', 'jb@mail.com', 'oui'),
+('0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', 'jb', 'jb@mail.com', '$2y$10$jAteYHBYQTZhoffjp2kB..tD.oYf5f6pjZ26MuyzrvmjltYQwQq8O'),
 ('d2da2a15-b22c-4403-ad33-345f0f59ad03', 'adrien', 'adrien@mail.com', '$2y$10$jAteYHBYQTZhoffjp2kB..tD.oYf5f6pjZ26MuyzrvmjltYQwQq8O'),
-('9d5edd7a-0352-4ba8-9094-03b95a3a143e', 'valentine', 'valentine@mail.com', 'oui'),
-('6acea239-1568-4af7-8cf6-13f405c4cc31', 'victorien', 'victorien@mail.com', 'oui'),
-('3c85ac51-e769-4efb-bab9-9a5307f55014', 'antho', 'antho@mail.com', 'oui'),
+('9d5edd7a-0352-4ba8-9094-03b95a3a143e', 'valentine', 'valentine@mail.com', '$2y$10$jAteYHBYQTZhoffjp2kB..tD.oYf5f6pjZ26MuyzrvmjltYQwQq8O'),
+('6acea239-1568-4af7-8cf6-13f405c4cc31', 'victorien', 'victorien@mail.com', '$2y$10$jAteYHBYQTZhoffjp2kB..tD.oYf5f6pjZ26MuyzrvmjltYQwQq8O'),
+('3c85ac51-e769-4efb-bab9-9a5307f55014', 'antho', 'antho@mail.com', '$2y$10$jAteYHBYQTZhoffjp2kB..tD.oYf5f6pjZ26MuyzrvmjltYQwQq8O'),
 ('24613cce-f7a4-41f0-bf6d-c318751f2d8d', 'pnj1', 'pnj1@mail.com', 'oui'),
 ('4aad1ecd-77cd-48cf-bbe1-b101868f69a8', 'pnj2', 'pnj2@mail.com', 'oui'),
 ('fd6519a7-90e1-4a70-9a49-95b28ccfe8ea', 'pnj3', 'pnj3@mail.com', 'oui');
 
 INSERT INTO colocs (uuid, name, address, post_code, town) VALUES
-('44a36f45-010f-4bf7-a7f0-8434108fecd6', 'call oc', '27 Bis Rue du Progrès', 93100, 'Montreuil'),
+('44a36f45-010f-4bf7-a7f0-8434108fecd6', 'Call Oc Duty', '27 Rue du Progrès', 93100, 'Montreuil'),
 ('42500393-9805-4bca-8b5d-03df0d297927', 'back ops', '1 Rue Henri Guinier', 34000,'Montpellier');
 
 INSERT INTO users_colocs (uuid, user_uuid, coloc_uuid, admin) VALUES
@@ -71,14 +71,14 @@ INSERT INTO expenses (uuid, name, value, category, type, fix, token, user_uuid, 
 ('a027b779-9a3a-4607-870c-6644edddb4e5', 'Loyer', 400, 'Charges/Loyer', 'Achat', 1, '4b9122d3-bca0-43f5-804e-3a90399f43b5', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('ba72304d-947d-45f6-9a35-ae53dbd1d72c', 'Loyer', -200, 'Charges/Loyer', 'Achat', 1, '4b9122d3-bca0-43f5-804e-3a90399f43b5', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('2c9e9024-6281-4077-ba88-98a575e60293', 'Loyer', -200, 'Charges/Loyer', 'Achat', 1, '4b9122d3-bca0-43f5-804e-3a90399f43b5', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('bd74eff9-272d-4d26-b7d9-eef68bfc1d2e', 'Eau', 40, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('4d6610b3-4b75-4997-bae1-4979aff30e88', 'Eau', -20, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('fd794240-c7f8-49a7-8e72-6724acf9e45a', 'Eau', -20, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('bd74eff9-272d-4d26-b7d9-eef68bfc1d2e', 'Eau', 120, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('4d6610b3-4b75-4997-bae1-4979aff30e88', 'Eau', -60, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('fd794240-c7f8-49a7-8e72-6724acf9e45a', 'Eau', -60, 'Charges/Loyer', 'Achat', 1, '6a279017-7108-4221-83d6-2782fdd8a5fb', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('5ca7e5a0-0fb9-4f61-95e3-9f1453f21c1c', 'Cafe', 120, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('994a05f5-c028-470d-abf9-c1c1cb02415f', 'Cafe', -60, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('1a74c98e-ef7c-4033-80b4-dbc9ad701fa7', 'Cafe', -60, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('c9a6f746-1e8b-48b6-a5d7-6b8c8b9a6d2f', 'Courses', 50, 'Courses', 'Achat', 0, '7c6d9f87-e5a4-46d0-bcde-a129940ef6c7', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('3g2h1i0j-9k8l-7m6n-5o4p-3e2f1g0h9i8j', 'Courses', -25, 'Courses', 'Achat', 0, '7c6d9f87-e5a4-46d0-bcde-a129940ef6c7', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('c9a6f746-1e8b-48b6-a5d7-6b8c8b9a6d2f', 'Courses', 50, 'Courses', 'Achat', 0, '7c6d9f87-e5a4-46d0-bcde-a129940ef6c7', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('3g2h1i0j-9k8l-7m6n-5o4p-3e2f1g0h9i8j', 'Courses', -25, 'Courses', 'Achat', 0, '7c6d9f87-e5a4-46d0-bcde-a129940ef6c7', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('2h1i0j9k-8l7m-6n5o-4p3q-2f1g0h9i8j7k', 'Courses', -25, 'Courses', 'Achat', 0, '7c6d9f87-e5a4-46d0-bcde-a129940ef6c7', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('e1b2c3d4-f5a6-47e8-b2c9-1d0e9f8g7h6i', 'Soirée', 20, 'Abonnements', 'Achat', 0, '8d5edd7a-0352-4ba8-9094-03b95a3a143e', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('1i0j9k8l-7m6n-5o4p-3q2r-1g0h9i8j7k6l', 'Soirée', -10, 'Abonnements', 'Achat', 0, '8d5edd7a-0352-4ba8-9094-03b95a3a143e', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),

@@ -25,9 +25,9 @@
 
 .coloc {
   display: grid;
-  grid-template-columns: repeat(14, 1fr);
+  grid-template-columns: repeat(15, 1fr);
   gap: 10px;
-  grid-template-areas: 'a b b b b b c c c c c c d d d';
+  grid-template-areas: 'a b b b b b b c c c c c c d d d';
   align-items: center;
 
   width: 100%;

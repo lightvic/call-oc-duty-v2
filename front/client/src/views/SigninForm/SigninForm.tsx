@@ -16,7 +16,7 @@ export default function SigninForm() {
       label: 'Mot de passe',
       type: 'password',
       name: 'pwd',
-      placeholder: '*******',
+      placeholder: '•••••••',
       length: 4,
     },
   ]
@@ -45,7 +45,7 @@ export default function SigninForm() {
     if (array.includes('')) {
       setShowToast(true)
       setTypeToast('error')
-      setMessageToast('Tous les champs doivent être remplit')
+      setMessageToast('Tous les champs doivent être remplit.')
     } else
       fetch('http://localhost:4557/api/login', {
         method: 'POST',

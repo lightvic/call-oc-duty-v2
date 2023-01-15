@@ -1,5 +1,6 @@
 .stats-container {
   width: 100%;
+  height: 108px;
 
   background-color: white;
 
@@ -34,7 +35,7 @@
   font-size: 1.5rem;
 }
 
-.donut {
+.doughnut {
   width: 108px;
 }
 
@@ -57,5 +58,26 @@
 }
 
 .stats-buttons:hover div {
-  background-color: var(--main-color);
+  background-color: var(--main-color-hover);
+}
+
+.no-stats-container {
+  width: 100%;
+  height: 108px;
+
+  background-color: white;
+
+  border: solid 1px var(--grey);
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+}
+
+.no-stats {
+  font-family: Inter-ExtraLight;
+  font-size: 0.875rem;
 }

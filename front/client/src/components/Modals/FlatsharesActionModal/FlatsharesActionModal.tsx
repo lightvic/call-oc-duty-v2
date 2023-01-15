@@ -117,7 +117,7 @@ export default function FlatsharesActionModal() {
     if (array.includes('')) {
       setShowToast(true)
       setTypeToast('error')
-      setMessageToast('Tous les champs doivent être remplit')
+      setMessageToast('Tous les champs doivent être remplit.')
     } else submit
   }
 

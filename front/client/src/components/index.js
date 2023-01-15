@@ -24,16 +24,15 @@ import FlatsharesActionModal from './Modals/FlatsharesActionModal/FlatsharesActi
 import PurchaseInfoModal from './Modals/PurchaseInfoModal/PurchaseInfoModal'
 
 // Purchases
-import PurchasesContainer from './Purchases/PurchasesContainer/PurchasesContainer'
-import ReccurentPurchase from './Purchases/ReccurentPurchase/ReccurentPurchase'
 import RecentPurchase from './Purchases/RecentPurchase/RecentPurchase'
+import ReccurentPurchase from './Purchases/ReccurentPurchase/ReccurentPurchase'
 
 // Notifications
 import Toast from './Toast/Toast'
 
 // Stats
-import StatsContainer from './Stats/StatsContainer/StatsContainer'
-import PersonelDounghnut from './Stats/PersonalStat/PersonelDounghnut'
+import PersonalStat from './Stats/PersonalStat/PersonalStat'
+import ColocStat from './Stats/ColocStat/ColocStat'
 
 export {
   PurchasesButton,
@@ -49,12 +48,11 @@ export {
   PurchaseActionModal,
   PurchaseInfoModal,
   FlatsharesActionModal,
-  PurchasesContainer,
   ReccurentPurchase,
   RecentPurchase,
   RedirectButton,
   ButtonDropdown,
   Toast,
-  StatsContainer,
-  PersonelDounghnut,
+  PersonalStat,
+  ColocStat,
 }

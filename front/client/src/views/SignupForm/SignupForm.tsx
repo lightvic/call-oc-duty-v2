@@ -24,14 +24,14 @@ export default function SignupForm() {
       label: 'Mot de passe',
       type: 'password',
       name: 'pwd',
-      placeholder: '*******',
+      placeholder: '•••••••',
       length: 4,
     },
     {
       label: 'Confirmer le mot de passe',
       type: 'password',
       name: 'confirmPassword',
-      placeholder: '*******',
+      placeholder: '•••••••',
       length: 4,
     },
   ]
@@ -83,7 +83,7 @@ export default function SignupForm() {
       if (array[i] === '') {
         setShowToast(true)
         setTypeToast('error')
-        setMessageToast('Tous les champs doivent être remplit')
+        setMessageToast('Tous les champs doivent être remplit.')
       }
       if (!array.includes('') && array[2] !== array[3]) {
         setShowToast(true)

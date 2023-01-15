@@ -1,34 +1,33 @@
 import {
-  PersonelDounghnut,
-  ReccurentPurchase,
-  RecentPurchase,
   FilterButton,
   Menu,
   PurchasesButton,
-  StatsContainer,
+  ColocStat,
+  PersonalStat,
+  ReccurentPurchase,
+  RecentPurchase,
 } from '../../components'
 import jwt_decode from 'jwt-decode'
-import ColocDounghnut from '../../components/ColocDoughnut/ColocDounghnut'
 
 export default function Dashboard() {
-//   const filters = [
-//     {
-//       value: '12 mois',
-//       timeLimit: 365,
-//     },
-//     {
-//       value: '30 jours',
-//       timeLimit: 30,
-//     },
-//     {
-//       value: '7 jours',
-//       timeLimit: 7,
-//     },
-//     {
-//       value: '24 heures',
-//       timeLimit: 1,
-//     },
-//   ]
+  const filters = [
+    {
+      value: '12 mois',
+      timeLimit: 365,
+    },
+    {
+      value: '30 jours',
+      timeLimit: 30,
+    },
+    {
+      value: '7 jours',
+      timeLimit: 7,
+    },
+    {
+      value: '24 heures',
+      timeLimit: 1,
+    },
+  ]
   const currentUser = jwt_decode(sessionStorage.token)
   const colocUuid = sessionStorage.getItem('coloc_uuid')
 
@@ -41,21 +40,21 @@ export default function Dashboard() {
           <p>Heureux de vous revoir, {(currentUser as any).pseudo} !</p>
         </div>
 
-        {/* <div className="dashboard-buttons">
+        <div className="dashboard-buttons">
           <FilterButton filters={filters} />
           <PurchasesButton button={'Ajouter une dépense'} />
-        </div> */}
-
-        <div className="dashboard-donuts-container">
-          <StatsContainer title={'Dépenses Personnel'} price={'1920,29 €'} />
-          <span className="dashboard-donuts-space"></span>
-          <StatsContainer title={'Dépenses de la coloc'} price={'4328,44 €'} />
         </div>
 
-        <PersonelDounghnut />
-        <ColocDounghnut />
-        <RecentPurchase />
-        <ReccurentPurchase />
+        <div className="dashboard-donuts-container">
+          <PersonalStat />
+          <span className="dashboard-donuts-space"></span>
+          <ColocStat />
+        </div>
+
+        <div className="purchases-container">
+          <ReccurentPurchase />
+          Recent
+        </div>
       </div>
     </>
   )

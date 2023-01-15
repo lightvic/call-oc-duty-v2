@@ -24,9 +24,7 @@
 @import './Modals/PurchaseInfoModal/PurchaseInfoModal';
 
 /* Purchases */
-@import './Purchases/PurchasesContainer/PurchasesContainer';
-@import './Purchases/ReccurentPurchase/ReccurentPurchase';
-@import './Purchases/RecentPurchase/RecentPurchase';
+@import './Purchases/Purchases';
 
 /* Stats */
-@import './Stats/StatsContainer/StatsContainer';
+@import './Stats/Stats';

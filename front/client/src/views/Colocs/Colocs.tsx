@@ -49,8 +49,8 @@ export default function Colocs() {
             >
               <img className="img-coloc" src="/img.png" alt="" />
               <p>{coloc.name}</p>
-              <p>{coloc.town}</p>
               <p>{coloc.address}</p>
+              <p>{coloc.town}</p>
             </button>
           ))}
         <button className="new-coloc-button" onClick={addNewColoc}>
