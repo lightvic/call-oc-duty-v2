@@ -77,9 +77,22 @@ INSERT INTO expenses (uuid, name, value, category, type, fix, token, user_uuid, 
 ('5ca7e5a0-0fb9-4f61-95e3-9f1453f21c1c', 'Cafe', 120, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('994a05f5-c028-470d-abf9-c1c1cb02415f', 'Cafe', -60, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
 ('1a74c98e-ef7c-4033-80b4-dbc9ad701fa7', 'Cafe', -60, 'Autres', 'Achat', 0, '3da731bc-08ee-4876-8aa2-ed6d13897820', 'd2da2a15-b22c-4403-ad33-345f0f59ad03', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
-('0723b25d-1475-41d8-ad4b-40573cc518f9', 'Courses', 100, 'Courses', 'Achat', 0, '454268a0-ce06-49db-a86c-96e644dcaabb', 'fd6519a7-90e1-4a70-9a49-95b28ccfe8ea', '42500393-9805-4bca-8b5d-03df0d297927'),
-('5203f2ca-5e01-41b9-a53c-9f25df1d5fe0', 'Eau', 30, 'Charges/Loyer', 'Remboursement', 1, 'a2189fda-3072-4c6e-87ee-fe282a69b109', '4aad1ecd-77cd-48cf-bbe1-b101868f69a8', '42500393-9805-4bca-8b5d-03df0d297927'),
-('1b04defd-4030-4ba6-8385-f7924219f647', 'Loyer', 300, 'Charges/Loyer', 'Achat', 1, '4e1f8b2d-1e3d-433c-a5b5-e98ab54a2972', '3c85ac51-e769-4efb-bab9-9a5307f55014', '42500393-9805-4bca-8b5d-03df0d297927');
+('c9a6f746-1e8b-48b6-a5d7-6b8c8b9a6d2f', 'Courses', 50, 'Courses', 'Achat', 0, '7c6d9f87-e5a4-46d0-bcde-a129940ef6c7', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('3g2h1i0j-9k8l-7m6n-5o4p-3e2f1g0h9i8j', 'Courses', -25, 'Courses', 'Achat', 0, '7c6d9f87-e5a4-46d0-bcde-a129940ef6c7', '0e0d9f87-e5a4-46d0-bcde-a129940ef6c7', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('2h1i0j9k-8l7m-6n5o-4p3q-2f1g0h9i8j7k', 'Courses', -25, 'Courses', 'Achat', 0, '7c6d9f87-e5a4-46d0-bcde-a129940ef6c7', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('e1b2c3d4-f5a6-47e8-b2c9-1d0e9f8g7h6i', 'Soirée', 20, 'Abonnements', 'Achat', 0, '8d5edd7a-0352-4ba8-9094-03b95a3a143e', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('1i0j9k8l-7m6n-5o4p-3q2r-1g0h9i8j7k6l', 'Soirée', -10, 'Abonnements', 'Achat', 0, '8d5edd7a-0352-4ba8-9094-03b95a3a143e', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('d1b2c3d4-f5a6-47e8-b2c9-1d0e9f8g7h6i', 'Soirée', -10, 'Abonnements', 'Achat', 0, '8d5edd7a-0352-4ba8-9094-03b95a3a143e', '3c85ac51-e769-4efb-bab9-9a5307f55014', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p', 'Abonnement', 30, 'Abonnements', 'Achat', 1, '3c85ac51-e769-4efb-bab9-9a5307f55014', '3c85ac51-e769-4efb-bab9-9a5307f55014', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('9e7d8f6c-5b4a-3c2d-1e0f-9a8b7c6d5e4f', 'Abonnement', -15, 'Abonnements', 'Achat', 1, '3c85ac51-e769-4efb-bab9-9a5307f55014', '3c85ac51-e769-4efb-bab9-9a5307f55014', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('8d7c6b5a-4e3f-2g1h-0i9j-8f7g6h5i4j3k', 'Abonnement', -15, 'Abonnements', 'Achat', 1, '3c85ac51-e769-4efb-bab9-9a5307f55014', '6acea239-1568-4af7-8cf6-13f405c4cc31', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('qrstuvwxyz-abcdefghij-klmnopqrst-uvwxyzabcd', 'Nécessités', 20, 'Abonnements', 'Achat', 0, '6acea239-1568-4af7-8cf6-13f405c4cc31', '6acea239-1568-4af7-8cf6-13f405c4cc31', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('7c6b5a4e-3g2h-1i0j-9k8l-7d6c5b4a3e2f', 'Nécessités', -10, 'Abonnements', 'Achat', 0, '6acea239-1568-4af7-8cf6-13f405c4cc31', '6acea239-1568-4af7-8cf6-13f405c4cc31', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('6b5a4e3g-2h1i-0j9k-8l7m-6c5b4a3e2f1g', 'Nécessités', -10, 'Abonnements', 'Achat', 0, '6acea239-1568-4af7-8cf6-13f405c4cc31', '3c85ac51-e769-4efb-bab9-9a5307f55014', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('1234567890-abcdefghij-klmnopqrst-uvwxyzabcd', 'Autres', 100, 'Autres', 'Achat', 0, '3c85ac51-e769-4efb-bab9-9a5307f55014', '3c85ac51-e769-4efb-bab9-9a5307f55014', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('5a4e3g2h-1i0j-9k8l-7m6n-5b4a3e2f1g0h', 'Autres', -50, 'Autres', 'Achat', 0, '3c85ac51-e769-4efb-bab9-9a5307f55014', '3c85ac51-e769-4efb-bab9-9a5307f55014', '44a36f45-010f-4bf7-a7f0-8434108fecd6'),
+('4e3g2h1i-0j9k-8l7m-6n5o-4a3e2f1g0h9i', 'Autres', -50, 'Autres', 'Achat', 0, '3c85ac51-e769-4efb-bab9-9a5307f55014', '9d5edd7a-0352-4ba8-9094-03b95a3a143e', '44a36f45-010f-4bf7-a7f0-8434108fecd6');
+
 
 UPDATE colocs SET address = IFNULL(CONVERT(CONVERT(CONVERT(address USING latin1)USING binary)USING utf8),address);
 UPDATE colocs SET town = IFNULL(CONVERT(CONVERT(CONVERT(town USING latin1)USING binary)USING utf8),town);
