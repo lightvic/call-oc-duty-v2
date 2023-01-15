@@ -6,7 +6,6 @@ import jwt_decode from 'jwt-decode';
 
 export default function RecentPurchase() {
   const token = jwt_decode(sessionStorage.token)
-  const navigate = useNavigate()
 
 //'/api/unFixExpense/{colocUuid}&{limitDate}'
   const [purchases, setPurchases]= useState()
@@ -19,10 +18,6 @@ export default function RecentPurchase() {
   })
   .then((data) => data.json())
   .then((json) => {
-    if (json.message === 'invalid cred') {
-      sessionStorage.removeItem('token')
-      navigate('/signin')
-    }
     setPurchases(json.unfix)
   })
 }, [])

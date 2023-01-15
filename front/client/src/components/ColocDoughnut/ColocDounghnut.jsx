@@ -7,7 +7,6 @@ import jwt_decode from 'jwt-decode';
 
 export default function ColocDounghnut() {
   const token = jwt_decode(sessionStorage.token)
-  const navigate = useNavigate()
 
   const [expenses, setExpense]= useState()
   useEffect(() => {
@@ -19,10 +18,6 @@ export default function ColocDounghnut() {
   })
   .then((data) => data.json())
   .then((json) => {
-    if (json.message === 'invalid cred') {
-      sessionStorage.removeItem('token')
-      navigate('/signin')
-    }
     setExpense(json.colocExpense)
   })
 }, [])
@@ -31,7 +26,6 @@ export default function ColocDounghnut() {
       var totalValue = 0
       const COLORS = []
       const data = [{ name: 'Nécessités', value: 200 },]
-      console.log(expenses)
 
       expenses.map((expenses,index) => (
         data.push({name: expenses.category, value: parseInt(expenses.value)})

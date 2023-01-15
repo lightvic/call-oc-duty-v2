@@ -1,9 +1,8 @@
 import { $CombinedState } from '@reduxjs/toolkit';
 import React, { PureComponent, useEffect, useState } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import {useNavigate} from "react-router-dom";
 import jwt_decode from 'jwt-decode';
-
-// #[Route('/api/colocStat/{colocUuid}&{limitDate}', 'colocStat', ['GET'])] => route à envoyer
 
 
 export default function PersonelDounghnut() {
@@ -17,13 +16,14 @@ export default function PersonelDounghnut() {
     })
   })
     .then(data => data.json())
-    .then(json => setExpense(json.userExpense))
-  },[]);
+    .then(json => {
+      setExpense(json.colocExpense)
+    })
+  }, [])
 
   if (expenses != null){
     const COLORS = []
-    const data = [{ name: 'Nécessités', value: 200 },]
-    console.log(expenses)
+    const data = []
 
     expenses.map((expenses,index) => (
       data.push({name: expenses.category, value: parseInt(expenses.value)})
@@ -50,8 +50,6 @@ export default function PersonelDounghnut() {
       }
     })
 
-    console.log(COLORS)
-    // const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#73BFB8','#E8FCCF'];    
     
     return (
       <div>

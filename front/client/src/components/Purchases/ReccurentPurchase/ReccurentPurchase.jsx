@@ -5,7 +5,6 @@ import jwt_decode from 'jwt-decode';
 
 export default function ReccurentPurchase() {
   const token = JSON.parse(sessionStorage.token)
-  const navigate = useNavigate()
 
 //'/api/unFixExpense/{colocUuid}&{limitDate}'
   const [purchases, setPurchases]= useState()
@@ -18,16 +17,10 @@ export default function ReccurentPurchase() {
   })
   .then((data) => data.json())
   .then((json) => {
-    if (json.message === 'invalid cred') {
-      sessionStorage.removeItem('token')
-      navigate('/signin')
-    }
     setPurchases(json.unfix)
   })
 }, [])
-  console.log(purchases)
   const date = new Date("2023-01-13 21:17:44")
-  console.log(date.getDate())
   if (purchases != null){
     const ListMonth = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Sptembre",
                       "Octobre","Novembre","Décembre"]    
