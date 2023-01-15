@@ -18,6 +18,7 @@
   width: 400px;
 }
 
+.repayment,
 .recent-purchase {
   border-radius: 8px;
   padding: 10px;
@@ -63,11 +64,6 @@
   margin: auto;
 }
 
-.recent-purchase-price {
-  font-family: Inter-SemiBold;
-  color: var(--main-color);
-}
-
 .purchase-icon {
   width: 25px;
   height: 25px;
@@ -106,11 +102,14 @@
   margin: auto;
 }
 
+.recent-purchase-price,
+.repayment-span,
 .purchase p:last-child {
   color: var(--main-color);
   font-family: Inter-SemiBold;
 }
 
+.repayment:hover,
 .recent-purchase:hover,
 .purchase:hover {
   background-color: var(--choice-hover);
@@ -123,6 +122,7 @@
 .purshases-container-empty {
   height: 120px;
 }
+
 .empty-purchases {
   display: flex;
   justify-content: center;
@@ -131,4 +131,8 @@
 
   font-family: Inter-ExtraLight;
   font-size: 0.875rem;
+}
+
+.purshases-container--repayment {
+  margin-bottom: 28px;
 }

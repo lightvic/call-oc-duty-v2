@@ -26,6 +26,7 @@ import PurchaseInfoModal from './Modals/PurchaseInfoModal/PurchaseInfoModal'
 // Purchases
 import RecentPurchase from './Purchases/RecentPurchase/RecentPurchase'
 import ReccurentPurchase from './Purchases/ReccurentPurchase/ReccurentPurchase'
+import Repayment from './Purchases/Repayment/Repayment'
 
 // Notifications
 import Toast from './Toast/Toast'
@@ -55,4 +56,5 @@ export {
   Toast,
   PersonalStat,
   ColocStat,
+  Repayment,
 }

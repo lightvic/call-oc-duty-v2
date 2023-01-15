@@ -17,7 +17,6 @@ export default function FilterButton({
       limit: e.currentTarget.getAttribute('data-time-limit'),
     }
     sessionStorage.setItem('date', JSON.stringify(date))
-    console.log(sessionStorage.date['value'])
   }
 
   return (
@@ -29,7 +28,7 @@ export default function FilterButton({
           className="filter"
           style={
             filter.value === selectedFilter
-              ? { backgroundColor: 'var(--main-color-light)' }
+              ? { backgroundColor: 'var(--main-color)', color: 'var(--white)' }
               : { backgroundColor: '' }
           }
           onClick={getFilter}

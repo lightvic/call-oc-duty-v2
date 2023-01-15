@@ -8,7 +8,7 @@ import {
   RecentPurchase,
 } from '../../components'
 import jwt_decode from 'jwt-decode'
-import Repayment from '../../components/Repayment/Repayment'
+import Repayment from '../../components/Purchases/Repayment/Repayment'
 
 export default function Dashboard() {
   const filters = [
@@ -55,11 +55,12 @@ export default function Dashboard() {
 
         <div className="purchases-container">
           <div>
+            <Repayment />
             <ReccurentPurchase />
           </div>
-          <RecentPurchase />
-
-          <Repayment />
+          <div>
+            <RecentPurchase />
+          </div>
         </div>
       </div>
     </>
