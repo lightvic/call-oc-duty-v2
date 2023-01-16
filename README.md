@@ -1,4 +1,9 @@
 # Call-oc-duty
+
+to try, connect in signin with:
+- email : adrien@mail.com
+- password : truc
+
 A colocation expense management application that allows roommates to track and manage their shared expenses.
 Users can input and categorize expenses, assign them to specific roommates, and view a summary of the current balance.
 The application also include features such as recurring expenses, the ability to split costs, and tracking of reimbursements.
