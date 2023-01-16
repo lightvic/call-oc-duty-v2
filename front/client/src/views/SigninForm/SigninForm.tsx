@@ -78,7 +78,7 @@ export default function SigninForm() {
   return (
     <div className="signin-signup">
       <div className="signin-signup-container">
-        <p className="signin-signup-title">Connection</p>
+        <p className="signin-signup-title">Connexion</p>
         <p className="signin-signup-subtitle">
           Heureux de vous revoir ! Entrez vos informations
         </p>
